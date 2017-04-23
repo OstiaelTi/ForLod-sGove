@@ -28,7 +28,7 @@ public class IA_Diablillo : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        target = GameObject.FindGameObjectWithTag("Obsacle").transform;
+        obstacle = GameObject.FindGameObjectWithTag("Obstacle").transform;
 
         transform.position = new Vector2(x, y);
     }
@@ -37,17 +37,22 @@ public class IA_Diablillo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector2(
-            target.position.x * moveSpeed + (1 - moveSpeed) * transform.position.x, 
-            target.position.y * moveSpeed + (1 - moveSpeed) * transform.position.y
-            );
-        if ((-transform.position.x + obstacle.position.x < disToChangeDirecction) || (-transform.position.y + obstacle.position.y < disToChangeDirecction))
+        if (((obstacle.position.x - transform.position.x) < disToChangeDirecction && (obstacle.position.x - transform.position.x) > -disToChangeDirecction) || 
+            ((obstacle.position.y - transform.position.y) < disToChangeDirecction && (obstacle.position.y - transform.position.y) > -disToChangeDirecction))
         {
             transform.position = new Vector2(
-            -(target.position.x * moveSpeed + (1 - moveSpeed) * transform.position.x),
-            -(target.position.y * moveSpeed + (1 - moveSpeed) * transform.position.y)
-            );
+             (transform.position.x - disToChangeDirecction*moveSpeed),
+             (transform.position.y - disToChangeDirecction*moveSpeed)
+             );
         }
+        else 
+        {
+            transform.position = new Vector2(
+                target.position.x * moveSpeed + (1 - moveSpeed) * transform.position.x,
+                target.position.y * moveSpeed + (1 - moveSpeed) * transform.position.y
+                );
+        }
+       
     }
 
 }
