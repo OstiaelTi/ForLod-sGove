@@ -37,22 +37,11 @@ public class IA_Diablillo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (((obstacle.position.x - transform.position.x) < disToChangeDirecction && (obstacle.position.x - transform.position.x) > -disToChangeDirecction) || 
-            ((obstacle.position.y - transform.position.y) < disToChangeDirecction && (obstacle.position.y - transform.position.y) > -disToChangeDirecction))
-        {
-            transform.position = new Vector2(
-             (transform.position.x - disToChangeDirecction*moveSpeed),
-             (transform.position.y - disToChangeDirecction*moveSpeed)
-             );
-        }
-        else 
-        {
             transform.position = new Vector2(
                 target.position.x * moveSpeed + (1 - moveSpeed) * transform.position.x,
                 target.position.y * moveSpeed + (1 - moveSpeed) * transform.position.y
                 );
-        }
-       
+        
     }
 
 }

@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Cross.cs" />
     <Compile Include="Assets\Scripts\GiovanniControl.cs" />
     <Compile Include="Assets\Scripts\IA_Diablillo.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
