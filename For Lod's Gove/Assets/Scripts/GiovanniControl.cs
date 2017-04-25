@@ -20,6 +20,7 @@ public class GiovanniControl : MonoBehaviour
 
     private  Animator animator;
     private bool facingRight;
+   
 
     // Use this for initialization
     void Start () {
@@ -40,14 +41,17 @@ public class GiovanniControl : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        
+        animator.SetFloat("Speed", Mathf.Abs(horizontal+vertical));
+        
+
 
         transform.Translate(
             moveSpeed * horizontal * Time.deltaTime,
             moveSpeed * vertical * Time.deltaTime, 
             0f);
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontal));
-        animator.SetFloat("Speed", Mathf.Abs(vertical));
+       
 
         Flip(horizontal);
 

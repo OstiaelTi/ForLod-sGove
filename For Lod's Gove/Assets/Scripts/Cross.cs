@@ -55,48 +55,9 @@ public class Cross : MonoBehaviour
         }
 
 
-        if (shoot && moveUp)
+        if (itsGoing)
         {
-            itsGoing = true;
-
-            do
-            {
-                transform.position = new Vector2(0, 1 * speed);
-                distance += -timeDistanceEnd;
-            } while (shoot || distance > 0);
-        }
-
-        if (shoot && moveDown)
-        {
-            itsGoing = true;
-
-            do
-            {
-                transform.position = new Vector2(0, -1 * speed);
-                distance += -timeDistanceEnd;
-            } while (shoot || distance > 0);
-        }
-
-        if (shoot && moveRight)
-        {
-            itsGoing = true;
-
-            do
-            {
-                transform.position = new Vector2(1 * speed, 0);
-                distance += -timeDistanceEnd;
-            } while (shoot || distance > 0);
-        }
-
-        if (shoot && moveLeft)
-        {
-            itsGoing = true;
-
-            do
-            {
-                transform.position = new Vector2(-1 * speed, 0);
-                distance += -timeDistanceEnd;
-            } while (shoot || distance > 0);
+            transform.forward = new Vector3(player.TransformDirection.x, player.TransformDirection.y, player.TransformDirection.z);
         }
 
         itsGoing = false;
