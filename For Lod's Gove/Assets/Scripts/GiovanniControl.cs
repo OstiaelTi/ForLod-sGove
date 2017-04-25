@@ -18,12 +18,15 @@ public class GiovanniControl : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector2 movement;
 
-  
-
+    private  Animator animator;
+    private bool facingRight;
 
     // Use this for initialization
     void Start () {
         rb2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
+        facingRight = true;
     }
 	
 	// Update is called once per frame
@@ -34,12 +37,22 @@ public class GiovanniControl : MonoBehaviour
 
     void FixedUpdate()
     {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+
         transform.Translate(
-            moveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime,
-            moveSpeed * Input.GetAxis("Vertical") * Time.deltaTime, 
+            moveSpeed * horizontal * Time.deltaTime,
+            moveSpeed * vertical * Time.deltaTime, 
             0f);
-        
-        
+
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
+        animator.SetFloat("Speed", Mathf.Abs(vertical));
+
+        Flip(horizontal);
+
+
+
         /*moveUp = Input.GetKey("up");
         moveDown = Input.GetKey("down");
         moveRight = Input.GetKey("right");
@@ -57,7 +70,19 @@ public class GiovanniControl : MonoBehaviour
 
         
         rb2d.AddForce(movement);*/
-        
+
+    }
+
+    private void Flip (float horizontal)
+    {
+        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+        {
+            facingRight = !facingRight;
+
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
     }
 
 }
