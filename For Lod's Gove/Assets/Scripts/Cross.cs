@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 
 public class Cross : MonoBehaviour
@@ -62,4 +62,4 @@ public class Cross : MonoBehaviour
 
         itsGoing = false;
     }
-}
+}*/

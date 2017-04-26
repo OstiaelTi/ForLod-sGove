@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class GiovanniControl : MonoBehaviour
 {
+
+   
 
     public float moveSpeed;
 
@@ -25,9 +26,12 @@ public class GiovanniControl : MonoBehaviour
     // Use this for initialization
     void Start () {
         rb2d = GetComponent<Rigidbody2D>();
+        rb2d.freezeRotation = true;
+
         animator = GetComponent<Animator>();
 
         facingRight = true;
+
     }
 	
 	// Update is called once per frame
@@ -42,7 +46,7 @@ public class GiovanniControl : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         
-        animator.SetFloat("Speed", Mathf.Abs(horizontal+vertical));
+        animator.SetFloat("Speed", (Mathf.Abs(horizontal) + Mathf.Abs(vertical)));
         
 
 

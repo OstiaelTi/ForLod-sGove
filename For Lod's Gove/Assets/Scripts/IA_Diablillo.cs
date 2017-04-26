@@ -26,6 +26,7 @@ public class IA_Diablillo : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        rb2d.freezeRotation = true;
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
         obstacle = GameObject.FindGameObjectWithTag("Obstacle").transform;
@@ -37,11 +38,16 @@ public class IA_Diablillo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            transform.position = new Vector2(
-                target.position.x * moveSpeed + (1 - moveSpeed) * transform.position.x,
-                target.position.y * moveSpeed + (1 - moveSpeed) * transform.position.y
-                );
-        
+        float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
+
+        float unitari_x = (target.position.x - transform.position.x) / moduloVector;
+        float unitari_y = (target.position.y - transform.position.y) / moduloVector;
+
+        transform.position = new Vector2(
+            unitari_x * moveSpeed + transform.position.x,
+            unitari_y * moveSpeed + transform.position.y
+            );
+
     }
 
 }
@@ -51,4 +57,9 @@ public class IA_Diablillo : MonoBehaviour
     ((target.position.x / Mathf.Sqrt(Mathf.Pow(target.position.x, 2) + Mathf.Pow(target.position.y, 2))) * moveSpeed) + ((1 - moveSpeed) * (transform.position.x / Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.y, 2)))),
     ((target.position.y / Mathf.Sqrt(Mathf.Pow(target.position.x, 2) + Mathf.Pow(target.position.y, 2))) * moveSpeed) + ((1 - moveSpeed) * (transform.position.y / Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.y, 2))))
     );
+
+    transform.position = new Vector2(
+            target.position.x + unitari_x * moveSpeed + (1 - moveSpeed) * unitari_x + transform.position.x,
+            target.position.y + unitari_y * moveSpeed + (1 - moveSpeed) * unitari_y + transform.position.y
+            );
 */
