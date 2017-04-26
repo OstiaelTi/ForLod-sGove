@@ -21,6 +21,7 @@ public class GiovanniControl : MonoBehaviour
 
     private  Animator animator;
     private bool facingRight;
+
    
 
     // Use this for initialization
@@ -59,25 +60,7 @@ public class GiovanniControl : MonoBehaviour
 
         Flip(horizontal);
 
-
-
-        /*moveUp = Input.GetKey("up");
-        moveDown = Input.GetKey("down");
-        moveRight = Input.GetKey("right");
-        moveLeft = Input.GetKey("left");
-
-        if (moveUp)
-        {movement = new Vector2(0, moveSpeed);}
-        if (moveDown)
-        { movement = new Vector2(0, -moveSpeed); }
-        if (moveRight)
-        { movement = new Vector2(moveSpeed, 0); }
-        if (moveLeft)
-        { movement = new Vector2(-moveSpeed, 0); }
         
-
-        
-        rb2d.AddForce(movement);*/
 
     }
 
