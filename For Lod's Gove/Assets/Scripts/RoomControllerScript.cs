@@ -4,27 +4,42 @@ using UnityEngine;
 
 public class RoomControllerScript : MonoBehaviour {
 
-	public GameObject room;
-	public Transform roomPos;
-	public int ola;
-	public static int numeroSalas = 30,
+	public GameObject firstRoom;
+	public GameObject standardRoom;
+	public static int numeroSalas = 30;
+
+	public static int
 	porcentaje = 4,
-	dim = 50,
+	dim = 40,
 	count = 0;
 
-	private static int[,] mapa = new int[dim, dim];
-	private Vector2 roomPosition;
-	private int x = 0, y = 0;
 
-	private Rigidbody2D rb2d;
+	private static int[,] mapa = new int[dim, dim];
+	private Vector3 roomPosition;
+
+
 	// Use this for initialization
 	void Start () 
 	{
-		rb2d = GetComponent<Rigidbody2D>();
-		mapa[dim / 2, dim / 2] = 1;
-		roomPosition = new Vector2 (x,y);
-		roomPos = GameObject.FindGameObjectWithTag("roomContr").transform;
-		PrintMap ();
+		mapa[dim/2, dim/2] = 2;
+		roomPosition = new Vector2 ( dim/2 *64, dim/2*48);
+		Instantiate (firstRoom, roomPosition, Quaternion.identity);
+	
+		FillMap ();
+	
+		for (int i = 0; i < dim; i++)
+		{
+			for (int j = 0; j < dim; j++)
+			{
+
+				if(mapa[i,j] == 1)
+				{	roomPosition = new Vector2 ( i*64, j*48);
+					Instantiate(standardRoom , roomPosition, Quaternion.identity);
+
+				}
+			} 
+
+		}
 		
 	}
 	
@@ -33,7 +48,7 @@ public class RoomControllerScript : MonoBehaviour {
 		
 	}
 
-	static void PrintMap()
+	/*static void PrintMap()
 	{
 		for (int i = 0; i < dim; i++)
 		{
@@ -41,13 +56,13 @@ public class RoomControllerScript : MonoBehaviour {
 			{
 
 				if(mapa[i,j] == 1)
-				{	roomPosition = new Vector2 ((transform.position.x) + (640 * i), (transform.position.y) + (480 * j));
-					Instantiate(room , roomPosition);
+				{	roomPosition = new Vector2 ((640 * i), (480 * j));
+					Instantiate(room , roomPosition, Quaternion.identity);
 				}
 			} 
 				
 		}
-	}
+	}*/
 
 
 	static void FillMap()
@@ -60,9 +75,10 @@ public class RoomControllerScript : MonoBehaviour {
 			{
 				for (int j = 0; j < dim; j++)
 				{
-					if (mapa[i, j] == 1 && count < numeroSalas)
+					if (mapa[i, j] != 0 && count < numeroSalas)
 					{
 						PutSala(i, j);
+					
 
 					}
 
@@ -84,13 +100,13 @@ public class RoomControllerScript : MonoBehaviour {
 			freeMax = 2;
 
 
-		if (mapa[x, y - 1] == 1)
+		if (mapa[x, y - 1] != 0)
 			freeCount++;
-		if (mapa[x + 1, y] == 1)
+		if (mapa[x + 1, y] != 0)
 			freeCount++;
-		if (mapa[x, y + 1] == 1)
+		if (mapa[x, y + 1] != 0)
 			freeCount++;
-		if (mapa[x - 1, y] == 1)
+		if (mapa[x - 1, y] != 0)
 			freeCount++;
 
 		return freeCount <= freeMax;
