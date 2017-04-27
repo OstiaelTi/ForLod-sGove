@@ -31,7 +31,7 @@ public class IA_Diablillo : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
         obstacle = GameObject.FindGameObjectWithTag("Obstacle").transform;
 
-        transform.position = new Vector2(x, y);
+        
     }
 
 

@@ -7,6 +7,7 @@ public class GiovanniControl : MonoBehaviour
 
 	public GameObject cross;
 	public GameObject Camera;
+    public Transform cameraTransform;
 
 	private bool itsGoing;
 
@@ -37,7 +38,8 @@ public class GiovanniControl : MonoBehaviour
 		animator = GetComponent<Animator>();
 
 		facingRight = true;
-		Instantiate	(Camera, transform.position, Quaternion.identity);
+		Instantiate	(Camera, new Vector3(transform.position.x, transform.position.y, -100), Quaternion.identity);
+        
 
 
 	}
