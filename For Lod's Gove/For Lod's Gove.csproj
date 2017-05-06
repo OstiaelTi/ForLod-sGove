@@ -84,6 +84,8 @@
     <Compile Include="Assets\Scripts\IA_Diablillo.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\RoomControllerScript.cs" />
+    <Compile Include="Assets\Scripts\Room_1.cs" />
+    <Compile Include="Assets\Scripts\Room_2.cs" />
     <Compile Include="Assets\Scripts\StandardRoomScript.cs" />
     <Compile Include="Assets\Scripts\camaraFollow.cs" />
   </ItemGroup>

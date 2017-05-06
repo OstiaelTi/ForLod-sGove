@@ -5,14 +5,16 @@ using UnityEngine;
 public class RoomControllerScript : MonoBehaviour {
 
 	public GameObject firstRoom;
-	public GameObject standardRoom;
-	public static int numeroSalas = 30;
+	public GameObject Room_1;
+    public GameObject Room_2;
+    public static int numeroSalas = 30;
 
 	public static int
 	porcentaje = 4,
 	dim = 40,
 	count = 0;
 
+    private int random;
 
 	private static int[,] mapa = new int[dim, dim];
 	private Vector3 roomPosition;
@@ -34,9 +36,21 @@ public class RoomControllerScript : MonoBehaviour {
 
 				if(mapa[i,j] == 1)
 				{	roomPosition = new Vector2 ( i*64, j*48);
-					Instantiate(standardRoom , roomPosition, Quaternion.identity);
 
-				}
+                    random = Random.Range(0, 2);
+
+                    if (random <= 0.5)
+                    {
+                        Instantiate(Room_1, roomPosition, Quaternion.identity);
+                    }
+
+                    if (random > 0.5)
+                    {
+                        Instantiate(Room_2, roomPosition, Quaternion.identity);
+                    }
+
+
+                }
 			} 
 
 		}

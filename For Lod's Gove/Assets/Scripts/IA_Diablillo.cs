@@ -52,14 +52,3 @@ public class IA_Diablillo : MonoBehaviour
 
 }
 
-/*
- transform.position = new Vector2(
-    ((target.position.x / Mathf.Sqrt(Mathf.Pow(target.position.x, 2) + Mathf.Pow(target.position.y, 2))) * moveSpeed) + ((1 - moveSpeed) * (transform.position.x / Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.y, 2)))),
-    ((target.position.y / Mathf.Sqrt(Mathf.Pow(target.position.x, 2) + Mathf.Pow(target.position.y, 2))) * moveSpeed) + ((1 - moveSpeed) * (transform.position.y / Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.y, 2))))
-    );
-
-    transform.position = new Vector2(
-            target.position.x + unitari_x * moveSpeed + (1 - moveSpeed) * unitari_x + transform.position.x,
-            target.position.y + unitari_y * moveSpeed + (1 - moveSpeed) * unitari_y + transform.position.y
-            );
-*/

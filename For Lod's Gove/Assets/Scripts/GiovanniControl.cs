@@ -7,13 +7,13 @@ public class GiovanniControl : MonoBehaviour
 
 	public GameObject cross;
 	public GameObject Camera;
-    public Transform cameraTransform;
+
 
 	private bool itsGoing;
 
 	public float moveSpeed;
 	public float stamina;
-	public bool crossOut = false;
+	public bool crossOut;
 
 
 	//Booleans per controlar el moviment
@@ -38,11 +38,11 @@ public class GiovanniControl : MonoBehaviour
 		animator = GetComponent<Animator>();
 
 		facingRight = true;
-		Instantiate	(Camera, new Vector3(transform.position.x, transform.position.y, -100), Quaternion.identity);
-        
+		Instantiate	(Camera, new Vector3(transform.position.x, transform.position.y, -50), Quaternion.identity);
 
+        crossOut = false;
 
-	}
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -71,16 +71,16 @@ public class GiovanniControl : MonoBehaviour
 
 
 
-		/*if (Input.GetKey("j") && crossOut == false)
+		if (Input.GetKey("j") && crossOut == false)
 		{
-			Instantiate (cross, transform.position, Quaternion.identity);
+			Instantiate (cross, new Vector2 (transform.position.x, transform.position.y + 2), Quaternion.identity);
 			crossOut = true;
 		}
 
 		if (Input.GetKey ("j") && crossOut) 
 		{
 			stamina--;
-		}*/
+		}
 			
 
 
