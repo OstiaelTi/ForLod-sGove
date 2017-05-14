@@ -18,7 +18,9 @@ public class Cross : MonoBehaviour
     private Rigidbody2D rb2d;
 
     private bool itsGoing;
-    private bool clickJ;
+
+    
+
 
 
     private const double timeDistanceEnd = 0.01;
@@ -32,16 +34,16 @@ public class Cross : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         rb2d = GetComponent<Rigidbody2D>();
-
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        clickJ = Input.GetKey("j");
+        itsGoing = Input.GetKey("j");
 
         if (!itsGoing)
         {
@@ -61,17 +63,18 @@ public class Cross : MonoBehaviour
 
             if (positionX <= 2 && positionY <= 2)
             {
-                Giovanni.GetComponent<GiovanniControl>().crossOut = false;
-                Destroy(CrossObj);
-
+                horizontal = Input.GetAxis("Horizontal");
+                vertical = Input.GetAxis("Vertical");
+                //posar animació que porta la creu el giovanni i en el controller també
             }
            
+
         }
 
 
         if (itsGoing)
         {
-           
+          
 
             if (horizontal < 0 && vertical == 0)
             {
@@ -134,10 +137,7 @@ public class Cross : MonoBehaviour
             }
         }
 
-        if (clickJ)
-            itsGoing = true;
-        else
-            itsGoing = false;
+        
 
        
     }

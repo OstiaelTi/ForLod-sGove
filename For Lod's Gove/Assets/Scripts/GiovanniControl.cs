@@ -12,7 +12,9 @@ public class GiovanniControl : MonoBehaviour
 	private bool itsGoing;
 
 	public float moveSpeed;
-	public float stamina;
+    private float moveSpeedDash;
+    private float moveSpeedInicial;
+    public float stamina;
 	public bool crossOut;
 
 
@@ -28,10 +30,13 @@ public class GiovanniControl : MonoBehaviour
 	private  Animator animator;
 	private bool facingRight;
 
+    public bool isDead;
+    
 
 
-	// Use this for initialization
-	void Start () {
+
+    // Use this for initialization
+    void Start () {
 		rb2d = GetComponent<Rigidbody2D>();
 		rb2d.freezeRotation = true;
 
@@ -40,8 +45,11 @@ public class GiovanniControl : MonoBehaviour
 		facingRight = true;
 		Instantiate	(Camera, new Vector3(transform.position.x, transform.position.y, -50), Quaternion.identity);
 
-        crossOut = false;
+        moveSpeedInicial = moveSpeed;
+        moveSpeedDash = moveSpeed * 3;
 
+        crossOut = false;
+        isDead = false;
     }
 
 	// Update is called once per frame
@@ -70,19 +78,37 @@ public class GiovanniControl : MonoBehaviour
 		Flip(horizontal);
 
 
-
+        //crusss
 		if (Input.GetKey("j") && crossOut == false)
 		{
 			Instantiate (cross, new Vector2 (transform.position.x, transform.position.y + 2), Quaternion.identity);
 			crossOut = true;
 		}
 
-		if (Input.GetKey ("j") && crossOut) 
+        //dashhh
+        if (Input.GetKey("k") && stamina >= 50)
+        {
+            moveSpeed = moveSpeedDash;
+            //posar animació dash
+        }
+        else if (!Input.GetKey("k") && stamina < 50)
+        {
+            moveSpeed = moveSpeedInicial;
+            //posar animació caminar normal
+        }
+
+        if (Input.GetKey ("j") || Input.GetKey ("k")) 
 		{
 			stamina--;
 		}
-			
 
+
+
+
+        if (isDead)
+        {
+            Death();
+        }
 
 	}
 
@@ -98,4 +124,17 @@ public class GiovanniControl : MonoBehaviour
 		}
 	}
 
+    void Death()
+    {
+        //Activar animació de muerte 
+        //posar imatge de has mort o posar directament el menú
+        //anular moviment 
+        OnGUI();
+    }
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(20, 20, transform.position.x, transform.position.y), "estoy muertin");
+    }
+
 }
+

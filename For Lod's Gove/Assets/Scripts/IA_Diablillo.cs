@@ -12,7 +12,12 @@ public class IA_Diablillo : MonoBehaviour
     public Transform target;
     public Transform obstacle;
 
-    public float disToChangeDirecction;
+    private bool facingRight;
+
+    //Cross
+    GameObject cross;
+    Cross crossScript;
+    bool crossInRange;
 
 
     //posicio inicial
@@ -21,6 +26,7 @@ public class IA_Diablillo : MonoBehaviour
 
     private Rigidbody2D rb2d;
 
+    public bool isDead = false;
 
     // Use this for initialization
     void Start()
@@ -28,12 +34,32 @@ public class IA_Diablillo : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
 
+      //  cross = GameObject.FindGameObjectWithTag("Cross");
+        
+
         target = GameObject.FindGameObjectWithTag("Player").transform;
         obstacle = GameObject.FindGameObjectWithTag("Obstacle").transform;
 
-        
+        facingRight = true;
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.gameObject == cross)
+        {
+            crossInRange = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+
+        if (other.gameObject == cross)
+        {
+            crossInRange = false;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -47,6 +73,36 @@ public class IA_Diablillo : MonoBehaviour
             unitari_x * moveSpeed + transform.position.x,
             unitari_y * moveSpeed + transform.position.y
             );
+
+       if (target.position.x < transform.position.x && facingRight)
+        {
+            Flip();
+        }
+
+        if (target.position.x > transform.position.x && !facingRight)
+        {
+            Flip();
+        }
+
+    }
+
+    private void Flip()
+    {
+            facingRight = !facingRight;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+    }
+
+    private void attack()
+    {
+        life -= 50;
+    }
+
+    private void Death()
+    {
+        //Activar animació de muerte 
+        Destroy(IA_Diablillo);
 
     }
 
