@@ -17,9 +17,15 @@ public class Cross : MonoBehaviour
 
     private Rigidbody2D rb2d;
 
-    private bool itsGoing;
+    private bool
+        itsOnGiovanni,
+        itsGoing,
+        itsGoingUp,
+        itsGoingRight,
+        itsGoingLeft,
+        itsGoingDown;
 
-    
+
 
 
 
@@ -37,17 +43,28 @@ public class Cross : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
 
+        itsOnGiovanni = true;
+        itsGoing = false;
+        itsGoingUp = false;
+        itsGoingRight = false;
+        itsGoingLeft = false;
+        itsGoingDown = false;
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        itsGoing = Input.GetKey("j");
+        if (!itsGoingUp && !itsGoingRight && !itsGoingLeft && !itsGoingDown)
+            itsGoing = false;
+        else
+            itsGoing = true;
+
 
         if (!itsGoing)
         {
-           
+
             float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
 
             float unitari_x = (target.position.x - transform.position.x) / moduloVector;
@@ -57,88 +74,155 @@ public class Cross : MonoBehaviour
                 unitari_x * speed * 2 + transform.position.x,
                 unitari_y * speed * 2 + transform.position.y
                 );
-
-            float positionX = Mathf.Abs(target.position.x - transform.position.x);
-            float positionY = Mathf.Abs(target.position.y - transform.position.y);
-
-            if (positionX <= 2 && positionY <= 2)
-            {
-                horizontal = Input.GetAxis("Horizontal");
-                vertical = Input.GetAxis("Vertical");
-                //posar animació que porta la creu el giovanni i en el controller també
-            }
-           
-
         }
 
-
-        if (itsGoing)
+        float positionX = Mathf.Abs(target.position.x - transform.position.x);
+        float positionY = Mathf.Abs(target.position.y - transform.position.y);
+        if (positionX <= 2.5 && positionY <= 2.5)
         {
-          
-
-            if (horizontal < 0 && vertical == 0)
-            {
-                transform.position = new Vector2(
-                    -speed + transform.position.x,
-                    transform.position.y
-                    );
-            }
-            else if (horizontal > 0 && vertical == 0)
-            {
-                transform.position = new Vector2(
-                    speed + transform.position.x,
-                    transform.position.y
-                    );
-            }
-            else if (horizontal == 0 && vertical < 0)
-            {
-                transform.position = new Vector2(
-                    transform.position.x,
-                    -speed + transform.position.y
-                    );
-            }
-            else if (horizontal == 0 && vertical > 0)
-            {
-                transform.position = new Vector2(
-                    transform.position.x,
-                    speed + transform.position.y
-                    );
-            }
+            itsOnGiovanni = true;
+            //posar animació que porta la creu el giovanni i en el controller també
+        }
+        else
+            itsOnGiovanni = false;
 
 
 
-            else if (horizontal < 0 && vertical < 0)
-            {
-                transform.position = new Vector2(
-                    -speed + transform.position.x,
-                    -speed + transform.position.y
-                    );
-            }
-            else if (horizontal > 0 && vertical > 0)
-            {
-                transform.position = new Vector2(
-                    speed + transform.position.x,
-                    speed + transform.position.y
-                    );
-            }
-            else if (horizontal > 0 && vertical < 0)
-            {
-                transform.position = new Vector2(
-                    speed + transform.position.x,
-                    -speed + transform.position.y
-                    );
-            }
-            else if (horizontal < 0 && vertical > 0)
-            {
-                transform.position = new Vector2(
-                    -speed + transform.position.x,
-                    speed + transform.position.y
-                    );
-            }
+
+
+        if (Input.GetKey("u") && itsOnGiovanni && !itsGoing)
+            itsGoingUp = true;
+
+        else if (Input.GetKey("k") && itsOnGiovanni && !itsGoing)
+            itsGoingRight = true;
+
+        else if (Input.GetKey("h") && itsOnGiovanni && !itsGoing)
+            itsGoingLeft = true;
+
+        else if (Input.GetKey("j") && itsOnGiovanni && !itsGoing)
+            itsGoingDown = true;
+
+
+
+        if (itsGoingUp)
+        {
+            transform.position = new Vector2(
+                       transform.position.x,
+                       speed + transform.position.y
+                       );
         }
 
-        
+        if (itsGoingRight)
+        {
+            itsGoing = true;
+            transform.position = new Vector2(
+                             speed + transform.position.x,
+                             transform.position.y
+                             );
+        }
+        if (itsGoingLeft)
+        {
+            itsGoing = true;
+            transform.position = new Vector2(
+                             -speed + transform.position.x,
+                             transform.position.y
+                             );
+        }
+        if (itsGoingDown)
+        {
+            itsGoing = true;
+            transform.position = new Vector2(
+                           transform.position.x,
+                           -speed + transform.position.y
+                           );
+        }
 
-       
+
+
+        if (!Input.GetKey("u"))
+            itsGoingUp = false;
+
+
+        if (!Input.GetKey("k"))
+            itsGoingRight = false;
+
+        if (!Input.GetKey("h"))
+            itsGoingLeft = false;
+
+        if (!Input.GetKey("j"))
+            itsGoingDown = false;
+
+
+
+
+        /*
+                if (itsGoing)
+                {
+
+
+                    if (horizontal < 0 && vertical == 0)
+                    {
+                        transform.position = new Vector2(
+                            -speed + transform.position.x,
+                            transform.position.y
+                            );
+                    }
+                    else if (horizontal > 0 && vertical == 0)
+                    {
+                        transform.position = new Vector2(
+                            speed + transform.position.x,
+                            transform.position.y
+                            );
+                    }
+                    else if (horizontal == 0 && vertical < 0)
+                    {
+                        transform.position = new Vector2(
+                            transform.position.x,
+                            -speed + transform.position.y
+                            );
+                    }
+                    else if (horizontal == 0 && vertical > 0)
+                    {
+                        transform.position = new Vector2(
+                            transform.position.x,
+                            speed + transform.position.y
+                            );
+                    }
+
+
+
+                    else if (horizontal < 0 && vertical < 0)
+                    {
+                        transform.position = new Vector2(
+                            -speed + transform.position.x,
+                            -speed + transform.position.y
+                            );
+                    }
+                    else if (horizontal > 0 && vertical > 0)
+                    {
+                        transform.position = new Vector2(
+                            speed + transform.position.x,
+                            speed + transform.position.y
+                            );
+                    }
+                    else if (horizontal > 0 && vertical < 0)
+                    {
+                        transform.position = new Vector2(
+                            speed + transform.position.x,
+                            -speed + transform.position.y
+                            );
+                    }
+                    else if (horizontal < 0 && vertical > 0)
+                    {
+                        transform.position = new Vector2(
+                            -speed + transform.position.x,
+                            speed + transform.position.y
+                            );
+                    }
+                }
+        */
+
+
+
     }
 }

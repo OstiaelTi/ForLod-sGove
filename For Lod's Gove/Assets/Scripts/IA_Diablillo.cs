@@ -102,7 +102,7 @@ public class IA_Diablillo : MonoBehaviour
     private void Death()
     {
         //Activar animació de muerte 
-        Destroy(IA_Diablillo);
+        //Destroy(IA_Diablillo);
 
     }
 
