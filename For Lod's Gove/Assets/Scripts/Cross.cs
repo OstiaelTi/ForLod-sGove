@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Cross : MonoBehaviour
 {
+    GiovanniStats giovannistats;
     public GameObject Giovanni;
     float horizontal;
     float vertical;
@@ -10,7 +11,6 @@ public class Cross : MonoBehaviour
 
     public float damage;
     public float speed;
-    public double distance;
     public GameObject CrossObj;
 
     public Transform target;
@@ -36,6 +36,11 @@ public class Cross : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        giovannistats = GameObject.FindObjectOfType<GiovanniStats>();
+        //el primer número pertany a la creu el segon és un multiplicador dels estats del Giovanni
+        damage = 5 * (1 + giovannistats.damage);
+        speed = 0.1f;
+        
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
 

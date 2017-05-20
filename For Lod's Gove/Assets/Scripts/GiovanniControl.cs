@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GiovanniControl : MonoBehaviour
 {
+    private GiovanniStats Stats;
+
+
+
 
     public GameObject cross;
     public GameObject Camera;
@@ -11,10 +15,10 @@ public class GiovanniControl : MonoBehaviour
 
     private bool itsGoing;
 
-    public float moveSpeed;
+    
     private float moveSpeedDash;
     private int directionH, directionV;
-    public float stamina;
+    
     public bool crossOut;
 
 
@@ -30,7 +34,9 @@ public class GiovanniControl : MonoBehaviour
     private Animator animator;
     private bool facingRight;
 
-    public bool isDead;
+
+   
+
 
 
 
@@ -39,6 +45,9 @@ public class GiovanniControl : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Stats = GameObject.FindObjectOfType<GiovanniStats>();
+
+
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
 
@@ -47,10 +56,10 @@ public class GiovanniControl : MonoBehaviour
         facingRight = true;
         Instantiate(Camera, new Vector3(transform.position.x, transform.position.y, -50), Quaternion.identity);
 
-        moveSpeedDash = moveSpeed + 10;
+        moveSpeedDash = Stats.moveSpeed + 10;
 
         crossOut = false;
-        isDead = false;
+        
         moveUp = false;
         moveDown = false;
         moveRight = false;
@@ -63,8 +72,7 @@ public class GiovanniControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        
     }
 
     void FixedUpdate()
@@ -78,8 +86,8 @@ public class GiovanniControl : MonoBehaviour
 
 
         transform.Translate(
-            moveSpeed * horizontal * Time.deltaTime,
-            moveSpeed * vertical * Time.deltaTime,
+            Stats.moveSpeed * horizontal * Time.deltaTime,
+            Stats.moveSpeed * vertical * Time.deltaTime,
             0f);
 
         Flip(horizontal);
@@ -111,30 +119,30 @@ public class GiovanniControl : MonoBehaviour
         }
 
         //dashhh
-        if (Input.GetKey(KeyCode.Space) && stamina > 0)
+        if (Input.GetKey(KeyCode.Space) && Stats.fe > 0)
         {
            
 
             if (moveUp)
             {
                 directionV = 1;
-                GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 90);
+               
             }
 
             if (moveRight)
             {
                 directionH = 1;
-                GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+                
             }
             if (moveLeft)
             {
                 directionH = -1;
-                GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+               
             }
             if (moveDown)
             {
                 directionV = -1;
-                GetComponent<Transform>().eulerAngles = new Vector3(0, 0, -90);
+                
             }
 
             
@@ -150,18 +158,18 @@ public class GiovanniControl : MonoBehaviour
             moveDown = false;
             moveRight = false;
             moveLeft = false;
-            
+
 
             //stamina
-            stamina--;
+            Stats.fe--;
 
             //animation
-            animator.SetBool("Dash", true);
+            animator.SetBool("Dash", true); //canviar animació dash
         }
 
-        else if (!Input.GetKey(KeyCode.Space) || stamina <= 0)
+        else if (!Input.GetKey(KeyCode.Space) || Stats.fe <= 0)
         {
-            animator.SetBool("Dash", false);
+            animator.SetBool("Dash", false);//canviar animació
             GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
 
         }
@@ -172,7 +180,7 @@ public class GiovanniControl : MonoBehaviour
 
 
 
-            if (isDead)
+            if (Stats.isDead)
         {
             Death();
         }
