@@ -188,12 +188,14 @@ public class GiovanniControl : MonoBehaviour
 	{
 		if (Stats.isDead)
 		{
-			//Activar animació de muerte 
-			//posar imatge de has mort o posar directament el menú
-			//anular moviment 
-
-			print("muertin");
-			Destroy(me);
+            
+            //transform.position = new Vector2(transform.position.x, transform.position.y - 2);
+            animator.SetBool("Dead", true);//Activar animació de muerte 
+            //posar imatge de has mort o posar directament el menú
+            //anular moviment 
+           
+            print("muertin");
+			//Destroy(me);
 		}
 	}
 

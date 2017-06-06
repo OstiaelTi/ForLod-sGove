@@ -6,14 +6,13 @@ public class FirstRoom : MonoBehaviour{
 
 
 	public GameObject Player;
-	public GameObject cross;
+
     
 
     // Use this for initialization
     void Start () {
 	    Instantiate (Player, transform.position, Quaternion.identity);
 
-		Instantiate(cross, transform.position, Quaternion.identity);
 
        
 

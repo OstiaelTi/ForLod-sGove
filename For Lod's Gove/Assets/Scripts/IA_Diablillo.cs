@@ -14,9 +14,12 @@ public class IA_Diablillo : MonoBehaviour
 	public bool isDead = false;
 	public int x, y;
 	private bool beenAttacked;
+    private Animator animator;
+    
+    DiablilloDead diablillodead;
 
-	//Giovanni
-	public Transform target;
+    //Giovanni
+    public Transform target;
 	GiovanniStats giovannistats;
 	GiovanniControl giovannicontrol;
 
@@ -38,15 +41,21 @@ public class IA_Diablillo : MonoBehaviour
 		rb2d.freezeRotation = true;
 		spriterender = GetComponent<SpriteRenderer>();
 
-		giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
+        diablillodead = GameObject.FindObjectOfType<DiablilloDead>();
+        giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
 		giovannistats = GameObject.FindObjectOfType<GiovanniStats>();
 		crossStats = GameObject.FindObjectOfType<Cross>();
+        animator = GetComponent<Animator>();
 
-		target = GameObject.FindGameObjectWithTag("Player").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
 		obstacle = GameObject.FindGameObjectWithTag("Obstacle").transform;
 		cross = GameObject.FindGameObjectWithTag("Cross").transform;
 
-		beenAttacked = false;
+
+        Physics2D.IgnoreCollision(crossStats.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+
+        diablillodead.canDie = false;
+        beenAttacked = false;
 		facingRight = true;
 	}
 
@@ -126,18 +135,19 @@ public class IA_Diablillo : MonoBehaviour
 
 	private void attack()
 	{
-		if (Mathf.Abs(giovannicontrol.transform.position.x - transform.position.x) < 5 && Mathf.Abs(giovannicontrol.transform.position.y - transform.position.y) < 5)
+		if (Mathf.Abs(giovannicontrol.transform.position.x - transform.position.x) < 2.5 && Mathf.Abs(giovannicontrol.transform.position.y - transform.position.y) < 3)
 		{
-			giovannistats.isDead = true;
-		}
-	}
+            animator.SetBool("Attack", true);
+        }
+    }
 
 	private void Death()
 	{
-		//Activar animació de muerte 
-		Destroy(diablillo);
-		print("diablo MUERTO");
+        animator.SetBool("Dead", true);
 
-	}
+        if(diablillodead.canDie)
+        Destroy(diablillo);
+    }
+
 
 }

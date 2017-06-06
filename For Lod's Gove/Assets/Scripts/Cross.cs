@@ -1,15 +1,4 @@
-﻿Cross.cs
-DETALLES
-ACTIVIDAD
-Hoy
-
-Bernat Pont ha subido un elemento
-22:37
-Texto
-Cross.cs
-No hay actividad registrada antes del 6 de junio de 2017
-
-
+﻿
 ﻿using UnityEngine;
 using System.Collections;
 
@@ -17,7 +6,7 @@ public class Cross : MonoBehaviour
 {
 	GiovanniStats giovannistats;
 	GiovanniControl giovannicontrol;
-
+    IA_Diablillo diablillo;
 
 	public float damage;
 	public float speed;
@@ -46,26 +35,29 @@ public class Cross : MonoBehaviour
 	{
 		//el primer número pertany a la creu el segon és un multiplicador dels estats del Giovanni
 		damage = 5 * giovannistats.damage;
-		speed = 0.5f;
+		speed = 2f;
 
 		rb2d = GetComponent<Rigidbody2D>();
+        diablillo = GameObject.FindObjectOfType<IA_Diablillo>();
 
-
-		itsOnGiovanni = true;
+        itsOnGiovanni = true;
 		itsGoing = false;
 		itsGoingUp = false;
 		itsGoingRight = false;
 		itsGoingLeft = false;
 		itsGoingDown = false;
 
+        
+        Physics2D.IgnoreCollision(giovannicontrol.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+        
 
-	}
+    }
 
 	private void Awake()
 	{
 		giovannistats = GameObject.FindObjectOfType<GiovanniStats>();
 		giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
-	}
+    }
 
 	// Update is called once per frame
 	void Update()
