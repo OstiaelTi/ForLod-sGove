@@ -8,8 +8,7 @@ public class GiovanniControl : MonoBehaviour
 
 
 
-
-    public GameObject cross;
+    
     public GameObject Camera;
 
 
