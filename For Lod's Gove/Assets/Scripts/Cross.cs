@@ -67,19 +67,19 @@ public class Cross : MonoBehaviour
             itsGoing = true;
 
 
-        if (!itsGoing)
-        {
-
-            float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
-
-            float unitari_x = (target.position.x - transform.position.x) / moduloVector;
-            float unitari_y = (target.position.y - transform.position.y + 2) / moduloVector;
-
-            transform.position = new Vector2(
-                unitari_x * speed * 2 + transform.position.x,
-                unitari_y * speed * 2 + transform.position.y
-                );
-        }
+//        if (!itsGoing)
+//        {
+//
+//            float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
+//
+//            float unitari_x = (target.position.x - transform.position.x) / moduloVector;
+//            float unitari_y = (target.position.y - transform.position.y + 2) / moduloVector;
+//
+//            transform.position = new Vector2(
+//                unitari_x * speed * 2 + transform.position.x,
+//                unitari_y * speed * 2 + transform.position.y
+//                );
+//        }
 
         float positionX = Mathf.Abs(target.position.x - transform.position.x);
         float positionY = Mathf.Abs(target.position.y - transform.position.y);

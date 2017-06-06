@@ -12,7 +12,7 @@ public class IA_Diablillo : MonoBehaviour
     //Giovanni
     public Transform target;
     GiovanniStats giovannistats;
-
+	public DoorController room;
 
     public Transform obstacle;
 
@@ -41,6 +41,7 @@ public class IA_Diablillo : MonoBehaviour
 
         giovannistats = GameObject.FindObjectOfType<GiovanniStats>();
         crossStats = GameObject.FindObjectOfType<Cross>();
+		room = GameObject.FindObjectOfType<DoorController>();
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
         obstacle = GameObject.FindGameObjectWithTag("Obstacle").transform;
@@ -54,37 +55,34 @@ public class IA_Diablillo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (room.playerInRoom) {
 
-        if (crossContact())
-        {
-            isAttacked();
-            if (dLife <= 0)
-            {
-                Death();
-            }
-        }
+			if (crossContact ()) {
+				isAttacked ();
+				if (dLife <= 0) {
+					Death ();
+				}
+			}
 
-        float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
+			float moduloVector = Mathf.Sqrt (Mathf.Pow (target.position.x - transform.position.x, 2) + Mathf.Pow (target.position.y - transform.position.y, 2));
 
-        float unitari_x = (target.position.x - transform.position.x) / moduloVector;
-        float unitari_y = (target.position.y - transform.position.y) / moduloVector;
+			float unitari_x = (target.position.x - transform.position.x) / moduloVector;
+			float unitari_y = (target.position.y - transform.position.y) / moduloVector;
 
-        transform.position = new Vector2(
-            unitari_x * dSpeed + transform.position.x,
-            unitari_y * dSpeed + transform.position.y
-            );
+			transform.position = new Vector2 (
+				unitari_x * dSpeed + transform.position.x,
+				unitari_y * dSpeed + transform.position.y
+			);
 
-        if (target.position.x < transform.position.x && facingRight)
-        {
-            Flip();
-        }
+			if (target.position.x < transform.position.x && facingRight) {
+				Flip ();
+			}
 
-        if (target.position.x > transform.position.x && !facingRight)
-        {
-            Flip();
-        }
+			if (target.position.x > transform.position.x && !facingRight) {
+				Flip ();
+			}
 
-
+		}
 
     }
 

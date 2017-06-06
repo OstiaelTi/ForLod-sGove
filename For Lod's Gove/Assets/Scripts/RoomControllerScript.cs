@@ -14,6 +14,8 @@ public class RoomControllerScript : MonoBehaviour {
 	dim = 40,
 	count = 0;
 
+	public bool up = true, right = true, down = true, left = true;
+
     private int random;
 
 	private static int[,] mapa = new int[dim, dim];
@@ -24,10 +26,13 @@ public class RoomControllerScript : MonoBehaviour {
 	void Start () 
 	{
 		mapa[dim/2, dim/2] = 2;
-		roomPosition = new Vector2 ( dim/2 *64, dim/2*48);
+		FillMap ();
+
+		roomPosition = new Vector2 ( dim/2 *64, dim/2*51.2f);
+		checkDoor(dim/2, dim/2);
 		Instantiate (firstRoom, roomPosition, Quaternion.identity);
 	
-		FillMap ();
+
 	
 		for (int i = 0; i < dim; i++)
 		{
@@ -35,19 +40,14 @@ public class RoomControllerScript : MonoBehaviour {
 			{
 
 				if(mapa[i,j] == 1)
-				{	roomPosition = new Vector2 ( i*64, j*48);
+				{	roomPosition = new Vector2 ( i*64, j*51.2f);
 
-                    random = Random.Range(0, 2);
 
-                    if (random <= 0.5)
-                    {
+					checkDoor(i, j);
+
                         Instantiate(Room_1, roomPosition, Quaternion.identity);
-                    }
-
-                    if (random > 0.5)
-                    {
-                        Instantiate(Room_2, roomPosition, Quaternion.identity);
-                    }
+                    
+                   
 
 
                 }
@@ -101,6 +101,29 @@ public class RoomControllerScript : MonoBehaviour {
 
 			}
 		}
+	}
+
+	 void checkDoor(int i, int j)
+	{
+		if (mapa [i, j - 1] != 0)
+			up = true;
+		else
+			up = false;
+
+		if (mapa [i + 1, j] != 0)
+			right = true;
+		else
+			right = false;
+
+		if (mapa [i, j + 1] != 0)
+			down = true;
+		else
+			down = false;
+
+		if (mapa [i - 1, j] != 0)
+			left = true;
+		else
+			left = false;
 	}
 
 	static bool CheckNearby(int x, int y)
