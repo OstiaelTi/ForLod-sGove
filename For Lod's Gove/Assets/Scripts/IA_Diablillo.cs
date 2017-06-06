@@ -115,12 +115,12 @@ public class IA_Diablillo : MonoBehaviour
         //  PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI
         //  PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI      PETA AQUI
         // ABANS TENIA:
-        /*
+       
           if (Mathf.Abs(cross.position.x) - Mathf.Abs( transform.position.x) < 2 && Mathf.Abs(cross.position.y) -  Mathf.Abs(transform.position.y) < 2)
         {
             return true;
         }
-        */
+       
 
         //NO ENTENC RES PERQUE NO TE RES A VEURE );
         //SI DONAS AL PLAY VAN TOTS ELS DIABLILLOS LOCOS CAP AL PLAYER

@@ -58,7 +58,9 @@ public class GiovanniControl : MonoBehaviour
 
         moveSpeedDash = Stats.moveSpeed + 10;
 
-        crossOut = false;
+
+		crossOut = true;
+        //crossOut = false;
         
         moveUp = false;
         moveDown = false;
@@ -96,8 +98,7 @@ public class GiovanniControl : MonoBehaviour
         //crusss
         if (/*Input.GetKey("j") && */crossOut == false)
         {
-            Instantiate(cross, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
-            crossOut = true;
+           
         }
 
 
