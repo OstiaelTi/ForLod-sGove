@@ -192,8 +192,7 @@ public class GiovanniControl : MonoBehaviour
             //transform.position = new Vector2(transform.position.x, transform.position.y - 2);
             animator.SetBool("Dead", true);//Activar animació de muerte 
             //posar imatge de has mort o posar directament el menú
-            rb2d.isKinematic = false;
-            Stats.moveSpeed = 0; //anular moviment 
+            Stats.moveSpeed = 0; //anular moviment
 
 
             print("muertin");

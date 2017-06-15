@@ -68,13 +68,13 @@ public class IA_Diablillo : MonoBehaviour
 		if (crossContact())
 		{
 			isAttacked();
-			if (dLife <= 0)
-			{
-				Death();
-			}
 		}
+        if (dLife <= 0)
+        {
+            Death();
+        }
 
-		float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
+        float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
 
 		float unitari_x = (target.position.x - transform.position.x) / moduloVector;
 		float unitari_y = (target.position.y - transform.position.y) / moduloVector;
@@ -139,13 +139,17 @@ public class IA_Diablillo : MonoBehaviour
 		{
             animator.SetBool("Attack", true);
         }
+        if (giovannistats.isDead)
+        {
+            Physics2D.IgnoreCollision(giovannicontrol.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+        }
     }
 
 	private void Death()
 	{
         animator.SetBool("Dead", true);
-        diablillodead = GameObject.FindObjectOfType<DiablilloDead>();
-        if (diablillodead.canDie)
+        
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Diablillo_Die"))
         {
             Destroy(diablillo);
         }
