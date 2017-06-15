@@ -21,7 +21,8 @@ public class Cross : MonoBehaviour
 	itsGoingUp,
 	itsGoingRight,
 	itsGoingLeft,
-	itsGoingDown;
+	itsGoingDown,
+	delay;
 
 
 
@@ -47,6 +48,7 @@ public class Cross : MonoBehaviour
 		itsGoingRight = false;
 		itsGoingLeft = false;
 		itsGoingDown = false;
+		delay = false;
 
         
         Physics2D.IgnoreCollision(giovannicontrol.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
@@ -63,13 +65,17 @@ public class Cross : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+
+
+
+				
 		if (!itsGoingUp && !itsGoingRight && !itsGoingLeft && !itsGoingDown)
 			itsGoing = false;
 		else
 			itsGoing = true;
 
 
-		if (!itsGoing)
+		if (!itsGoing || giovannicontrol.currentFe <= 0)
 		{
 
 			float moduloVector = Mathf.Sqrt(Mathf.Pow(giovannicontrol.transform.position.x - transform.position.x, 2) + Mathf.Pow(giovannicontrol.transform.position.y - transform.position.y, 2));
@@ -87,6 +93,7 @@ public class Cross : MonoBehaviour
 
 		float positionX = Mathf.Abs(giovannicontrol.transform.position.x - transform.position.x);
 		float positionY = Mathf.Abs(giovannicontrol.transform.position.y - transform.position.y);
+
 		if (positionX <= 2.5 && positionY <= 2.5)
 		{
 			itsOnGiovanni = true;
@@ -95,33 +102,51 @@ public class Cross : MonoBehaviour
 		else
 			itsOnGiovanni = false;
 
+		if (giovannicontrol.currentFe <= 0 && !delay){
+			delay = true;
+			giovannicontrol.currentFe = -100;
+		}
+
+		if (giovannicontrol.currentFe > 0)
+			delay = false;
+			
+
+
+		if (itsGoing && giovannicontrol.currentFe > 0)
+			giovannicontrol.currentFe -= 3;
+		
+		
+		if (itsOnGiovanni && giovannicontrol.currentFe < giovannicontrol.maxFe)
+			giovannicontrol.currentFe += 10;
 
 
 
 
-		if (Input.GetKey("u") && itsOnGiovanni && !itsGoing)
+		if (Input.GetKey("u") && itsOnGiovanni && !itsGoing && giovannicontrol.currentFe > 50)
 			itsGoingUp = true;
 
-		else if (Input.GetKey("k") && itsOnGiovanni && !itsGoing)
+		else if (Input.GetKey("k") && itsOnGiovanni && !itsGoing && giovannicontrol.currentFe > 50)
 			itsGoingRight = true;
 
-		else if (Input.GetKey("h") && itsOnGiovanni && !itsGoing)
+		else if (Input.GetKey("h") && itsOnGiovanni && !itsGoing && giovannicontrol.currentFe > 50)
 			itsGoingLeft = true;
 
-		else if (Input.GetKey("j") && itsOnGiovanni && !itsGoing)
+		else if (Input.GetKey("j") && itsOnGiovanni && !itsGoing && giovannicontrol.currentFe > 50)
 			itsGoingDown = true;
 
 
 
-		if (itsGoingUp)
+
+		if (itsGoingUp && giovannicontrol.currentFe > 0)
 		{
+			itsGoing = true;
 			transform.position = new Vector2(
 				transform.position.x,
 				speed + transform.position.y
 			);
 		}
 
-		if (itsGoingRight)
+		if (itsGoingRight && giovannicontrol.currentFe > 0)
 		{
 			itsGoing = true;
 			transform.position = new Vector2(
@@ -129,20 +154,20 @@ public class Cross : MonoBehaviour
 				transform.position.y
 			);
 		}
-		if (itsGoingLeft)
+		if (itsGoingLeft && giovannicontrol.currentFe > 0 )
 		{
 			itsGoing = true;
 			transform.position = new Vector2(
-				-speed + transform.position.x,
+				 transform.position.x - speed,
 				transform.position.y
 			);
 		}
-		if (itsGoingDown)
+		if (itsGoingDown && giovannicontrol.currentFe > 0)
 		{
 			itsGoing = true;
 			transform.position = new Vector2(
 				transform.position.x,
-				-speed + transform.position.y
+				 transform.position.y - speed
 			);
 		}
 

@@ -1,16 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Room_1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Cross.cs">
     <Files>
+      <File FileName="Assets\Scripts\GiovanniControl.cs" Line="42" Column="9" />
+      <File FileName="Assets\Scripts\Cross.cs" Line="137" Column="3" />
+      <File FileName="Assets\Scripts\GiovanniStats.cs" Line="21" Column="18" />
       <File FileName="Assets\Scripts\RoomControllerScript.cs" Line="11" Column="23" />
-      <File FileName="Assets\Scripts\DoorController.cs" Line="63" Column="29" />
-      <File FileName="Assets\Scripts\Room_1.cs" Line="30" Column="1" />
-      <File FileName="Assets\Scripts\IA_Diablillo.cs" Line="107" Column="4" />
-      <File FileName="Assets\Scripts\GiovanniControl.cs" Line="85" Column="3" />
+      <File FileName="Assets\Scripts\DoorController.cs" Line="63" Column="93" />
+      <File FileName="Assets\Scripts\Room_1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\IA_Diablillo.cs" Line="187" Column="2" />
       <File FileName="Assets\Scripts\Rock.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FirstRoom.cs" Line="13" Column="15" />
-      <File FileName="Assets\Scripts\Cross.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GiovanniStats.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FirstRoom.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

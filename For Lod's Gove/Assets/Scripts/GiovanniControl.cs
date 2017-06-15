@@ -27,6 +27,8 @@ public class GiovanniControl : MonoBehaviour
 	private bool moveRight;
 	private bool moveLeft;
 
+	public float maxFe, currentFe;
+
 	private Rigidbody2D rb2d;
 	private Vector2 movement;
 
@@ -52,6 +54,8 @@ public class GiovanniControl : MonoBehaviour
 
 		moveSpeedDash = Stats.moveSpeed + 10;
 
+		maxFe = Stats.fe;
+		currentFe = maxFe;
 
 		crossOut = true;
 		//crossOut = false;
@@ -77,7 +81,7 @@ public class GiovanniControl : MonoBehaviour
 		float horizontal = Input.GetAxis("Horizontal");
 		float vertical = Input.GetAxis("Vertical");
 
-		print (roomNumber);
+		print (currentFe);
 
 		animator.SetFloat("Speed", (Mathf.Abs(horizontal) + Mathf.Abs(vertical)));
 

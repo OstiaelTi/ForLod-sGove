@@ -12,19 +12,19 @@ public class IA_Diablillo : MonoBehaviour
 	private Rigidbody2D rb2d;
 	private SpriteRenderer spriterender;
 	public bool isDead = false;
-	public int x, y;
+	public float x, y;
 	private bool beenAttacked;
-    private Animator animator;
-    
-    DiablilloDead diablillodead;
+	private Animator animator;
+
+	DiablilloDead diablillodead;
 
 	//Room
 	public int roomNumber;
 
 	RoomControllerScript controller;
 
-    //Giovanni
-    public Transform target;
+	//Giovanni
+	public Transform target;
 	GiovanniStats giovannistats;
 	GiovanniControl giovannicontrol;
 
@@ -50,22 +50,23 @@ public class IA_Diablillo : MonoBehaviour
 		rb2d = GetComponent<Rigidbody2D>();
 		rb2d.freezeRotation = true;
 		spriterender = GetComponent<SpriteRenderer>();
+		x = transform.position.x;
+		y = transform.position.y;
 
-        
-        giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
+		giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
 		giovannistats = GameObject.FindObjectOfType<GiovanniStats>();
 		crossStats = GameObject.FindObjectOfType<Cross>();
-        animator = GetComponent<Animator>();
+		animator = GetComponent<Animator>();
 
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+		target = GameObject.FindGameObjectWithTag("Player").transform;
 		obstacle = GameObject.FindGameObjectWithTag("Obstacle").transform;
 		cross = GameObject.FindGameObjectWithTag("Cross").transform;
 
 
-        Physics2D.IgnoreCollision(crossStats.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+		Physics2D.IgnoreCollision(crossStats.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
 
-        
-        beenAttacked = false;
+
+		beenAttacked = false;
 		facingRight = true;
 	}
 
@@ -75,39 +76,56 @@ public class IA_Diablillo : MonoBehaviour
 	void Update()
 	{
 
-		if(roomNumber == giovannicontrol.roomNumber){
-		if (crossContact())
+		if(roomNumber == giovannicontrol.roomNumber)
 		{
-			isAttacked();
-		}
-        if (dLife <= 0)
-        {
-            Death();
-        }
 
-        float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
-
-		float unitari_x = (target.position.x - transform.position.x) / moduloVector;
-		float unitari_y = (target.position.y - transform.position.y) / moduloVector;
-
-		transform.position = new Vector2(
-			unitari_x * dSpeed + transform.position.x,
-			unitari_y * dSpeed + transform.position.y
-		);
-
-		if (target.position.x < transform.position.x && facingRight)
-		{
-			Flip();
-		}
-
-		if (target.position.x > transform.position.x && !facingRight)
-		{
-			Flip();
-		}
-
-
-		attack();
+			if (crossContact())
+			{
+				isAttacked();
 			}
+			if (dLife <= 0)
+			{
+				Death();
+			}
+
+			float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
+
+			float unitari_x = (target.position.x - transform.position.x) / moduloVector;
+			float unitari_y = (target.position.y - transform.position.y) / moduloVector;
+
+			transform.position = new Vector2(
+				unitari_x * dSpeed + transform.position.x,
+				unitari_y * dSpeed + transform.position.y
+			);
+
+			if (target.position.x < transform.position.x && facingRight)
+			{
+				Flip();
+			}
+
+			if (target.position.x > transform.position.x && !facingRight)
+			{
+				Flip();
+			}
+
+			attack();
+
+		}
+
+		else
+		{
+			float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
+
+			float unitari_x = (x - transform.position.x) / moduloVector;
+			float unitari_y = (y - transform.position.y) / moduloVector;
+
+			transform.position = new Vector2(
+				unitari_x * dSpeed + transform.position.x,
+				unitari_y * dSpeed + transform.position.y
+			);
+		}
+
+
 	}
 
 	private void Flip()
@@ -149,23 +167,23 @@ public class IA_Diablillo : MonoBehaviour
 	{
 		if (Mathf.Abs(giovannicontrol.transform.position.x - transform.position.x) < 2.5 && Mathf.Abs(giovannicontrol.transform.position.y - transform.position.y) < 3)
 		{
-            animator.SetBool("Attack", true);
-        }
-        if (giovannistats.isDead)
-        {
-            Physics2D.IgnoreCollision(giovannicontrol.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
-        }
-    }
+			animator.SetBool("Attack", true);
+		}
+		if (giovannistats.isDead)
+		{
+			Physics2D.IgnoreCollision(giovannicontrol.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+		}
+	}
 
 	private void Death()
 	{
-        animator.SetBool("Dead", true);
-        
-        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Diablillo_Die"))
-        {
-            Destroy(diablillo);
-        }
-    }
+		animator.SetBool("Dead", true);
+
+		if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Diablillo_Die"))
+		{
+			Destroy(diablillo);
+		}
+	}
 
 
 }
