@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DiablilloDead : StateMachineBehaviour {
     public bool canDie;
+    IA_Diablillo diablillo;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        canDie = false;      
+    
+        canDie = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

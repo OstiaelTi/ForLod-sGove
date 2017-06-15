@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Cross : MonoBehaviour
 {
+    public GameObject cross;
 	GiovanniStats giovannistats;
 	GiovanniControl giovannicontrol;
     IA_Diablillo diablillo;
@@ -35,7 +36,7 @@ public class Cross : MonoBehaviour
 	{
 		//el primer número pertany a la creu el segon és un multiplicador dels estats del Giovanni
 		damage = 5 * giovannistats.damage;
-		speed = 2f;
+		speed = 0.5f;
 
 		rb2d = GetComponent<Rigidbody2D>();
         diablillo = GameObject.FindObjectOfType<IA_Diablillo>();
@@ -161,4 +162,12 @@ public class Cross : MonoBehaviour
 			itsGoingDown = false;
 
 	}
+
+    void deleteCross()
+    {
+        if(giovannistats.isDead)
+        {
+            Destroy(cross);
+        }
+    }
 }

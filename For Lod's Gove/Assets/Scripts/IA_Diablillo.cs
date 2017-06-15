@@ -41,7 +41,7 @@ public class IA_Diablillo : MonoBehaviour
 		rb2d.freezeRotation = true;
 		spriterender = GetComponent<SpriteRenderer>();
 
-        diablillodead = GameObject.FindObjectOfType<DiablilloDead>();
+        
         giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
 		giovannistats = GameObject.FindObjectOfType<GiovanniStats>();
 		crossStats = GameObject.FindObjectOfType<Cross>();
@@ -54,7 +54,7 @@ public class IA_Diablillo : MonoBehaviour
 
         Physics2D.IgnoreCollision(crossStats.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
 
-        diablillodead.canDie = false;
+        
         beenAttacked = false;
 		facingRight = true;
 	}
@@ -144,9 +144,11 @@ public class IA_Diablillo : MonoBehaviour
 	private void Death()
 	{
         animator.SetBool("Dead", true);
-
-        if(diablillodead.canDie)
-        Destroy(diablillo);
+        diablillodead = GameObject.FindObjectOfType<DiablilloDead>();
+        if (diablillodead.canDie)
+        {
+            Destroy(diablillo);
+        }
     }
 
 
