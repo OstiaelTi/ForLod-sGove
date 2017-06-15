@@ -9,6 +9,9 @@ public class GiovanniControl : MonoBehaviour
 	public GameObject Camera;
 	public GameObject me;
 	public GameObject cross;
+
+	public int roomNumber;
+
 	private bool itsGoing;
 
 
@@ -74,6 +77,7 @@ public class GiovanniControl : MonoBehaviour
 		float horizontal = Input.GetAxis("Horizontal");
 		float vertical = Input.GetAxis("Vertical");
 
+		print (roomNumber);
 
 		animator.SetFloat("Speed", (Mathf.Abs(horizontal) + Mathf.Abs(vertical)));
 

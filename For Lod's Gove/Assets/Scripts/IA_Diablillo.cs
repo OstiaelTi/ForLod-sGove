@@ -18,6 +18,11 @@ public class IA_Diablillo : MonoBehaviour
     
     DiablilloDead diablillodead;
 
+	//Room
+	public int roomNumber;
+
+	RoomControllerScript controller;
+
     //Giovanni
     public Transform target;
 	GiovanniStats giovannistats;
@@ -33,6 +38,11 @@ public class IA_Diablillo : MonoBehaviour
 	Cross crossStats;
 
 	//posicio inicial
+
+	void Awake(){
+		controller = GameObject.FindObjectOfType<RoomControllerScript>();
+		roomNumber = controller.roomNumber;
+	}
 
 	// Use this for initialization
 	void Start()
@@ -65,6 +75,7 @@ public class IA_Diablillo : MonoBehaviour
 	void Update()
 	{
 
+		if(roomNumber == giovannicontrol.roomNumber){
 		if (crossContact())
 		{
 			isAttacked();
@@ -96,6 +107,7 @@ public class IA_Diablillo : MonoBehaviour
 
 
 		attack();
+			}
 	}
 
 	private void Flip()

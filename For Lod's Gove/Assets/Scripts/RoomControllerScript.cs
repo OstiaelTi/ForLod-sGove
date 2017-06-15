@@ -8,7 +8,7 @@ public class RoomControllerScript : MonoBehaviour {
 	public GameObject Room_1;
     public GameObject Room_2;
     public static int numeroSalas = 30;
-
+	public int roomNumber;
 	public static int
 	porcentaje = 4,
 	dim = 40,
@@ -28,8 +28,11 @@ public class RoomControllerScript : MonoBehaviour {
 		mapa[dim/2, dim/2] = 2;
 		FillMap ();
 
+		roomNumber = 0;
 		roomPosition = new Vector2 ( dim/2 *64, dim/2*51.2f);
 		checkDoor(dim/2, dim/2);
+
+
 		Instantiate (firstRoom, roomPosition, Quaternion.identity);
 	
 
@@ -44,7 +47,7 @@ public class RoomControllerScript : MonoBehaviour {
 
 
 					checkDoor(i, j);
-
+						roomNumber++;
                         Instantiate(Room_1, roomPosition, Quaternion.identity);
                     
                    

@@ -7,8 +7,10 @@ public class Room_1 : MonoBehaviour {
     public GameObject Diablillo;
     public GameObject Rock;
 
+
     // Use this for initialization
-    void Start () {
+    void Awake () {
+
 
         Instantiate(Rock, new Vector2(transform.position.x + 10, transform.position.y), Quaternion.identity);
         Instantiate(Rock, new Vector2(transform.position.x - 10, transform.position.y), Quaternion.identity);
@@ -24,3 +26,5 @@ public class Room_1 : MonoBehaviour {
 		
 	}
 }
+
+

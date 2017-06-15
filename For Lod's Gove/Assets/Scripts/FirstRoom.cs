@@ -10,7 +10,7 @@ public class FirstRoom : MonoBehaviour{
     
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
 	    Instantiate (Player, transform.position, Quaternion.identity);
 
 
