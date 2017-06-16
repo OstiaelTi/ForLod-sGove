@@ -5,9 +5,9 @@ using UnityEngine;
 public class RoomControllerScript : MonoBehaviour {
 
 	public GameObject firstRoom;
-	public GameObject Room_1;
-    public GameObject Room_2;
-    public static int numeroSalas = 30;
+	public GameObject Room;
+    public GameObject LastRoom;
+    public static int numeroSalas = 10;
 	public int roomNumber;
 	public static int
 	porcentaje = 4,
@@ -17,6 +17,7 @@ public class RoomControllerScript : MonoBehaviour {
 	public bool up = true, right = true, down = true, left = true;
 
     private int random;
+	private bool last = true;
 
 	private static int[,] mapa = new int[dim, dim];
 	private Vector3 roomPosition;
@@ -43,12 +44,18 @@ public class RoomControllerScript : MonoBehaviour {
 			{
 
 				if(mapa[i,j] == 1)
-				{	roomPosition = new Vector2 ( i*64, j*51.2f);
-
-
+				{	
+					roomPosition = new Vector2 ( i*64, j*51.2f);
 					checkDoor(i, j);
 						roomNumber++;
-                        Instantiate(Room_1, roomPosition, Quaternion.identity);
+
+					if (Random.Range (roomNumber, numeroSalas) == numeroSalas && last) {
+						last = false;
+						Instantiate(LastRoom, roomPosition, Quaternion.identity);
+
+					}else
+						
+                        Instantiate(Room, roomPosition, Quaternion.identity);
                     
                    
 

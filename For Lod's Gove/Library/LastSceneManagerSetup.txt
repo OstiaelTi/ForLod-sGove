@@ -1,4 +1,7 @@
 sceneSetups:
-- path: ForLod-sGove.unity
+- path: Assets/Scenes/Zone1.unity
   isLoaded: 1
   isActive: 1
+- path: Assets/Scenes/Zone2.unity
+  isLoaded: 0
+  isActive: 0

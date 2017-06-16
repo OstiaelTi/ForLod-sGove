@@ -6,13 +6,14 @@ public class FirstRoom : MonoBehaviour{
 
 
 	public GameObject Player;
+	public GameObject Camera;
 
     
 
     // Use this for initialization
     void Awake () {
 	    Instantiate (Player, transform.position, Quaternion.identity);
-
+		Instantiate(Camera, new Vector3(transform.position.x, transform.position.y, -50), Quaternion.identity);
 
        
 

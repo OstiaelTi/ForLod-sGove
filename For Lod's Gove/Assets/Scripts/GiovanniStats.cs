@@ -1,5 +1,6 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GiovanniStats : MonoBehaviour
 {
@@ -19,11 +20,17 @@ public class GiovanniStats : MonoBehaviour
 		range = 1;
 
 		isDead = false;
+
+
+			
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+		if (Input.GetKey ("g")) {
+			SceneManager.LoadScene ("Zone2", LoadSceneMode.Single);
+		}
 
 	}
 }

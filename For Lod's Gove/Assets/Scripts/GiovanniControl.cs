@@ -6,7 +6,7 @@ public class GiovanniControl : MonoBehaviour
 {
 	private GiovanniStats Stats;
 
-	public GameObject Camera;
+
 	public GameObject me;
 	public GameObject cross;
 
@@ -50,7 +50,7 @@ public class GiovanniControl : MonoBehaviour
 		animator = GetComponent<Animator>();
 
 		facingRight = true;
-		Instantiate(Camera, new Vector3(transform.position.x, transform.position.y, -50), Quaternion.identity);
+
 
 		moveSpeedDash = Stats.moveSpeed + 10;
 
@@ -120,8 +120,11 @@ public class GiovanniControl : MonoBehaviour
 		}
 
 		//dashhh
+
+			
 		if (Input.GetKey(KeyCode.Space) && Stats.fe > 0)
 		{
+
 
 
 			if (moveUp)
