@@ -15,9 +15,11 @@ public class Cross : MonoBehaviour
 
 	private Rigidbody2D rb2d;
 
-	private bool
-	itsOnGiovanni,
-	itsGoing,
+    public bool
+    itsOnGiovanni,
+    itsGoing;
+
+    private bool
 	itsGoingUp,
 	itsGoingRight,
 	itsGoingLeft,
@@ -68,11 +70,13 @@ public class Cross : MonoBehaviour
 
 
 
-				
-		if (!itsGoingUp && !itsGoingRight && !itsGoingLeft && !itsGoingDown)
-			itsGoing = false;
-		else
-			itsGoing = true;
+
+        if (!itsGoingUp && !itsGoingRight && !itsGoingLeft && !itsGoingDown)
+        {
+            itsGoing = false;
+        }
+        else
+            itsGoing = true;
 
 
 		if (!itsGoing || giovannicontrol.currentFe <= 0)
@@ -94,9 +98,10 @@ public class Cross : MonoBehaviour
 		float positionX = Mathf.Abs(giovannicontrol.transform.position.x - transform.position.x);
 		float positionY = Mathf.Abs(giovannicontrol.transform.position.y - transform.position.y);
 
-		if (positionX <= 2.5 && positionY <= 2.5)
+		if (positionX <= 2.1 && positionY <= 2.1)
 		{
 			itsOnGiovanni = true;
+            
 			//posar animació que porta la creu el giovanni i en el controller també
 		}
 		else
@@ -109,15 +114,15 @@ public class Cross : MonoBehaviour
 
 		if (giovannicontrol.currentFe > 0)
 			delay = false;
-			
 
 
-		if (itsGoing && giovannicontrol.currentFe > 0)
-			giovannicontrol.currentFe -= 3;
-		
-		
-		if (itsOnGiovanni && giovannicontrol.currentFe < giovannicontrol.maxFe)
-			giovannicontrol.currentFe += 10;
+
+        if (itsGoing && giovannicontrol.currentFe > 0)
+            giovannicontrol.LoseFe();
+
+
+        if (itsOnGiovanni && giovannicontrol.currentFe < giovannicontrol.maxFe)
+            giovannicontrol.AddFe();
 
 
 
@@ -186,13 +191,16 @@ public class Cross : MonoBehaviour
 		if (!Input.GetKey("j"))
 			itsGoingDown = false;
 
-	}
+
+        if(itsOnGiovanni && !itsGoing)
+            deleteCross();
+
+    }
 
     void deleteCross()
     {
-        if(giovannistats.isDead)
-        {
+        giovannicontrol.crossOut = false;
+        if(!giovannicontrol.crossOut)
             Destroy(cross);
-        }
     }
 }

@@ -34,7 +34,7 @@ public class IA_Diablillo : MonoBehaviour
 
 	//Cross
 	bool crossInRange;
-	public Transform cross;
+	public GameObject cross;
 	Cross crossStats;
 
 	//posicio inicial
@@ -53,18 +53,13 @@ public class IA_Diablillo : MonoBehaviour
 		x = transform.position.x;
 		y = transform.position.y;
 
-		giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
+        
+        giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
 		giovannistats = GameObject.FindObjectOfType<GiovanniStats>();
-		crossStats = GameObject.FindObjectOfType<Cross>();
 		animator = GetComponent<Animator>();
 
 		target = GameObject.FindGameObjectWithTag("Player").transform;
 		obstacle = GameObject.FindGameObjectWithTag("Obstacle").transform;
-		cross = GameObject.FindGameObjectWithTag("Cross").transform;
-
-
-		Physics2D.IgnoreCollision(crossStats.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
-
 
 		beenAttacked = false;
 		facingRight = true;
@@ -76,54 +71,59 @@ public class IA_Diablillo : MonoBehaviour
 	void Update()
 	{
 
-		if(roomNumber == giovannicontrol.roomNumber)
-		{
+        if (roomNumber == giovannicontrol.roomNumber)
+        {
+            if (dLife <= 0)
+            {
+                Death();
+            }
 
-			if (crossContact())
-			{
-				isAttacked();
-			}
-			if (dLife <= 0)
-			{
-				Death();
-			}
+            float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
 
-			float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
+            float unitari_x = (target.position.x - transform.position.x) / moduloVector;
+            float unitari_y = (target.position.y - transform.position.y) / moduloVector;
 
-			float unitari_x = (target.position.x - transform.position.x) / moduloVector;
-			float unitari_y = (target.position.y - transform.position.y) / moduloVector;
+            transform.position = new Vector2(
+                unitari_x * dSpeed + transform.position.x,
+                unitari_y * dSpeed + transform.position.y
+            );
 
-			transform.position = new Vector2(
-				unitari_x * dSpeed + transform.position.x,
-				unitari_y * dSpeed + transform.position.y
-			);
+            if (cross)
+            {
+                crossStats = GameObject.FindObjectOfType<Cross>();
+                Physics2D.IgnoreCollision(crossStats.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
 
-			if (target.position.x < transform.position.x && facingRight)
-			{
-				Flip();
-			}
+                if (crossContact())
+                {
+                    isAttacked();
+                }
+            }
+        }
 
-			if (target.position.x > transform.position.x && !facingRight)
-			{
-				Flip();
-			}
+        else
+        {
+            float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
 
-			attack();
+            float unitari_x = (x - transform.position.x) / moduloVector;
+            float unitari_y = (y - transform.position.y) / moduloVector;
 
-		}
+            transform.position = new Vector2(
+                unitari_x * dSpeed + transform.position.x,
+                unitari_y * dSpeed + transform.position.y
+            );
+        }
 
-		else
-		{
-			float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
+        if (target.position.x < transform.position.x && facingRight)
+		    {
+			    Flip();
+		    }
 
-			float unitari_x = (x - transform.position.x) / moduloVector;
-			float unitari_y = (y - transform.position.y) / moduloVector;
+		if (target.position.x > transform.position.x && !facingRight)
+		    {
+			    Flip();
+		    }
 
-			transform.position = new Vector2(
-				unitari_x * dSpeed + transform.position.x,
-				unitari_y * dSpeed + transform.position.y
-			);
-		}
+		attack();
 
 
 	}
@@ -139,7 +139,7 @@ public class IA_Diablillo : MonoBehaviour
 	private bool crossContact()
 	{
 
-		if (Mathf.Abs(cross.position.x - transform.position.x) < 2 && Mathf.Abs(cross.position.y - transform.position.y) < 2)
+		if (Mathf.Abs(crossStats.transform.position.x - transform.position.x) < 2 && Mathf.Abs(crossStats.transform.position.y - transform.position.y) < 2)
 		{
 			return true;
 		}

@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 87
+  controlID: 11
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 88
+  controlID: 12
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 89
+  controlID: 13
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -382,10 +382,10 @@ MonoBehaviour:
     - {x: 251.80002, y: 312.80005}
     - {x: 521.2, y: 314}
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 21d3d835abc8fa641ab68542731c0225,
+  m_AnimatorController: {fileID: 9100000, guid: 955922aee21c2f844a14b666e3d184e6,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107983367152407328, guid: 21d3d835abc8fa641ab68542731c0225,
+  - m_Target: {fileID: 1107702044743572816, guid: 955922aee21c2f844a14b666e3d184e6,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -468,13 +468,13 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Prefabs
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: D:\unity\ForLod-sGove\For Lod's Gove
+  m_LastProjectPath: C:\Users\raul_\Desktop\ForLod-sGove\For Lod's Gove
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 78250000
-    m_LastClickedID: 9592
-    m_ExpandedIDs: 00000000fc2400000826000000ca9a3bffffff7f
+    m_SelectedIDs: 7a290000
+    m_LastClickedID: 10618
+    m_ExpandedIDs: 00000000522900009029000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -502,7 +502,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fc24000008260000
+    m_ExpandedIDs: 000000005229000090290000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -533,18 +533,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 2e2600002a250000282600000000000052250000d8280000862500007c250000822500003e250000de280000a42a0000ec270000002b00002c2b0000aa2d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Diablillo_1
-      m_OriginalName: Diablillo_1
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 9896
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 5}
     m_CreateAssetUtility:
@@ -583,7 +583,7 @@ MonoBehaviour:
     y: 92
     width: 369
     height: 926
-  m_ScrollPosition: {x: 0, y: 0}
+  m_ScrollPosition: {x: 0, y: 51.95508}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 160
@@ -618,9 +618,9 @@ MonoBehaviour:
     height: 650
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: fecffbff
     m_LastClickedID: 0
-    m_ExpandedIDs: 7cebffff8aebffff00000000
+    m_ExpandedIDs: 78dcffffbcf3ffffc4f3ffffa4f6ffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -705,9 +705,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 68.097595
+    m_Target: 12.506773
     speed: 2
-    m_Value: 68.097595
+    m_Value: 12.506773
   m_Ortho:
     m_Target: 1
     speed: 2

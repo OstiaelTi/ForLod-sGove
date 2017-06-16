@@ -4,198 +4,214 @@ using UnityEngine;
 
 public class GiovanniControl : MonoBehaviour
 {
-	private GiovanniStats Stats;
+    private GiovanniStats Stats;
 
+    Cross crossScript;
+    public int roomNumber;
+    public GameObject cross;
+    private bool itsGoing;
 
-	public GameObject me;
-	public GameObject cross;
 
-	public int roomNumber;
+    private float moveSpeedDash;
+    private int directionH, directionV;
 
-	private bool itsGoing;
+    public bool crossOut;
 
 
-	private float moveSpeedDash;
-	private int directionH, directionV;
+    //Booleans per controlar el moviment
+    private bool moveUp;
+    private bool moveDown;
+    private bool moveRight;
+    private bool moveLeft;
 
-	public bool crossOut;
+    public float maxFe, currentFe;
 
+    private Rigidbody2D rb2d;
+    private Vector2 movement;
 
-	//Booleans per controlar el moviment
-	private bool moveUp;
-	private bool moveDown;
-	private bool moveRight;
-	private bool moveLeft;
+    private Animator animator;
+    private bool facingRight;
 
-	public float maxFe, currentFe;
+    //enemie
 
-	private Rigidbody2D rb2d;
-	private Vector2 movement;
 
-	private Animator animator;
-	private bool facingRight;
+    // Use this for initialization
+    void Start()
+    {
+        Stats = GameObject.FindObjectOfType<GiovanniStats>();
 
-	//enemie
 
 
-	// Use this for initialization
-	void Start()
-	{
-		Stats = GameObject.FindObjectOfType<GiovanniStats>();
+        rb2d = GetComponent<Rigidbody2D>();
+        rb2d.freezeRotation = true;
 
+        animator = GetComponent<Animator>();
 
-		rb2d = GetComponent<Rigidbody2D>();
-		rb2d.freezeRotation = true;
+        facingRight = true;
 
-		animator = GetComponent<Animator>();
 
-		facingRight = true;
+        moveSpeedDash = Stats.moveSpeed + 10;
 
+        maxFe = Stats.fe;
+        currentFe = maxFe;
 
-		moveSpeedDash = Stats.moveSpeed + 10;
+        crossOut = false;
+        //crossOut = false;
 
-		maxFe = Stats.fe;
-		currentFe = maxFe;
+        moveUp = false;
+        moveDown = false;
+        moveRight = false;
+        moveLeft = false;
 
-		crossOut = true;
-		//crossOut = false;
 
-		moveUp = false;
-		moveDown = false;
-		moveRight = false;
-		moveLeft = false;
 
+    }
 
+    // Update is called once per frame
+    void Awake()
+    {
 
-	}
 
-	// Update is called once per frame
-	void Awake()
-	{
-		Instantiate(cross, new Vector2(transform.position.x, transform.position.y+2), Quaternion.identity);
+    }
 
-	}
+    void FixedUpdate()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-	void FixedUpdate()
-	{
-		float horizontal = Input.GetAxis("Horizontal");
-		float vertical = Input.GetAxis("Vertical");
+        print(currentFe);
 
-		print (currentFe);
+        animator.SetFloat("Speed", (Mathf.Abs(horizontal) + Mathf.Abs(vertical)));
 
-		animator.SetFloat("Speed", (Mathf.Abs(horizontal) + Mathf.Abs(vertical)));
 
 
+        transform.Translate(
+            Stats.moveSpeed * horizontal * Time.deltaTime,
+            Stats.moveSpeed * vertical * Time.deltaTime,
+            0f);
 
-		transform.Translate(
-			Stats.moveSpeed * horizontal * Time.deltaTime,
-			Stats.moveSpeed * vertical * Time.deltaTime,
-			0f);
+        Flip(horizontal);
 
-		Flip(horizontal);
 
+        //crusss
+        if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.U) || Input.GetKey(KeyCode.H) || Input.GetKey(KeyCode.K))
+        {
+            if (!crossOut)
+            {
+                Instantiate(cross, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
+                crossOut = true;
+            }
+        }
+        else
+        {
+            if(currentFe <= 100)
+                AddFe();
+        }
 
-		//crusss
-		if (/*Input.GetKey("j") && */crossOut == false)
-		{
 
-		}
+        if (horizontal < 0 && vertical == 0)
+        {
+            moveLeft = true;
+        }
+        else if (horizontal > 0 && vertical == 0)
+        {
+            moveRight = true;
+        }
+        else if (horizontal == 0 && vertical < 0)
+        {
+            moveDown = true;
+        }
+        else if (horizontal == 0 && vertical > 0)
+        {
+            moveUp = true;
+        }
 
+        //dashhh
 
-		if (horizontal < 0 && vertical == 0)
-		{
-			moveLeft = true;
-		}
-		else if (horizontal > 0 && vertical == 0)
-		{
-			moveRight = true;
-		}
-		else if (horizontal == 0 && vertical < 0)
-		{
-			moveDown = true;
-		}
-		else if (horizontal == 0 && vertical > 0)
-		{
-			moveUp = true;
-		}
 
-		//dashhh
+        if (Input.GetKey(KeyCode.Space) && Stats.fe > 0)
+        {
 
-			
-		if (Input.GetKey(KeyCode.Space) && Stats.fe > 0)
-		{
 
 
+            if (moveUp)
+            {
+                directionV = 1;
 
-			if (moveUp)
-			{
-				directionV = 1;
+            }
 
-			}
+            if (moveRight)
+            {
+                directionH = 1;
 
-			if (moveRight)
-			{
-				directionH = 1;
+            }
+            if (moveLeft)
+            {
+                directionH = -1;
 
-			}
-			if (moveLeft)
-			{
-				directionH = -1;
+            }
+            if (moveDown)
+            {
+                directionV = -1;
 
-			}
-			if (moveDown)
-			{
-				directionV = -1;
+            }
 
-			}
 
+            transform.Translate(
+                (directionH * moveSpeedDash) * Time.deltaTime,
+                (directionV * moveSpeedDash) * Time.deltaTime,
+                0f);
 
-			transform.Translate(
-				(directionH * moveSpeedDash) * Time.deltaTime,
-				(directionV * moveSpeedDash) * Time.deltaTime,
-				0f);
+            //reset
+            directionH = 0;
+            directionV = 0;
+            moveUp = false;
+            moveDown = false;
+            moveRight = false;
+            moveLeft = false;
 
-			//reset
-			directionH = 0;
-			directionV = 0;
-			moveUp = false;
-			moveDown = false;
-			moveRight = false;
-			moveLeft = false;
 
+            //stamina
+            Stats.fe--;
 
-			//stamina
-			Stats.fe--;
+            //animation
+            animator.SetBool("Dash", true); //canviar animació dash
+        }
 
-			//animation
-			animator.SetBool("Dash", true); //canviar animació dash
-		}
+        else if (!Input.GetKey(KeyCode.Space) || Stats.fe <= 0)
+        {
+            animator.SetBool("Dash", false);//canviar animació
+            GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
 
-		else if (!Input.GetKey(KeyCode.Space) || Stats.fe <= 0)
-		{
-			animator.SetBool("Dash", false);//canviar animació
-			GetComponent<Transform>().eulerAngles = new Vector3(0, 0, 0);
+        }
 
-		}
 
+        isDeath(); //pobre Giovanni );
+    }
 
-		isDeath(); //pobre Giovanni );
-	}
+    private void Flip(float horizontal)
+    {
+        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+        {
+            facingRight = !facingRight;
 
-	private void Flip(float horizontal)
-	{
-		if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
-		{
-			facingRight = !facingRight;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
+    }
 
-			Vector3 theScale = transform.localScale;
-			theScale.x *= -1;
-			transform.localScale = theScale;
-		}
-	}
+    public void AddFe()
+    {
+        currentFe += 10;
+    }
 
+    public void LoseFe()
+    {
+        currentFe -= 3;
+    }
 
-	void isDeath()
+    void isDeath()
 	{
 		if (Stats.isDead)
 		{
