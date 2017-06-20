@@ -1,13 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GiovanniControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Spawn.cs">
     <Files>
-      <File FileName="Assets\Scripts\RoomControllerScript.cs" Line="11" Column="24" />
-      <File FileName="Assets\Scripts\DoorController.cs" Line="44" Column="23" />
-      <File FileName="Assets\Scripts\Room_1.cs" Line="19" Column="3" />
-      <File FileName="Assets\Scripts\FirstRoom.cs" Line="16" Column="83" />
-      <File FileName="Assets\Scripts\NextZone.cs" Line="11" Column="78" />
+      <File FileName="Assets\Scripts\RoomControllerScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DoorController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Room_1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FirstRoom.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\NextZone.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GiovanniControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Spawn.cs" Line="12" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
