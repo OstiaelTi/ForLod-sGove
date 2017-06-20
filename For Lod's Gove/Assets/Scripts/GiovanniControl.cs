@@ -32,15 +32,17 @@ public class GiovanniControl : MonoBehaviour
     private Animator animator;
     private bool facingRight;
 
-    //enemie
+    //Sounds
+    public AudioSource respirar;
+    public AudioSource caminar;
+    public AudioSource atacar;
+    public AudioSource morir;
 
 
     // Use this for initialization
     void Start()
     {
         Stats = GameObject.FindObjectOfType<GiovanniStats>();
-
-
 
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.freezeRotation = true;
@@ -63,7 +65,12 @@ public class GiovanniControl : MonoBehaviour
         moveRight = false;
         moveLeft = false;
 
-
+        //Sounds
+        AudioSource[] audios = GetComponents<AudioSource>();
+        respirar = audios[0];
+        caminar = audios[1];
+        atacar = audios[2];
+        morir = audios[3];
 
     }
 
@@ -82,7 +89,13 @@ public class GiovanniControl : MonoBehaviour
         print(currentFe);
 
         animator.SetFloat("Speed", (Mathf.Abs(horizontal) + Mathf.Abs(vertical)));
-
+        if (Mathf.Abs(horizontal) + Mathf.Abs(vertical) > 0)
+        {
+            caminar.Play();
+            caminar.loop = true;
+        }
+        else
+            caminar.Stop();
 
 
         transform.Translate(
@@ -98,6 +111,7 @@ public class GiovanniControl : MonoBehaviour
         {
             if (!crossOut)
             {
+                atacar.Play();
                 Instantiate(cross, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
                 crossOut = true;
             }
@@ -185,6 +199,13 @@ public class GiovanniControl : MonoBehaviour
 
         }
 
+        if (!caminar.isPlaying && !atacar.isPlaying && !morir.isPlaying)
+        {
+            respirar.Play();
+            respirar.loop = true;
+        }
+        else
+            respirar.Stop();
 
         isDeath(); //pobre Giovanni );
     }
@@ -215,7 +236,7 @@ public class GiovanniControl : MonoBehaviour
 	{
 		if (Stats.isDead)
 		{
-            
+            morir.Play();
             //transform.position = new Vector2(transform.position.x, transform.position.y - 2);
             animator.SetBool("Dead", true);//Activar animació de muerte 
             //posar imatge de has mort o posar directament el menú

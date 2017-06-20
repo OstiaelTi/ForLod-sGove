@@ -38,11 +38,21 @@ public class IA_Diablillo : MonoBehaviour
 	Cross crossStats;
 
 
+    //Sounds
+    public AudioSource fly;
+    public AudioSource atacar;
+    public AudioSource morir;
+
+
 
     void Awake(){
 		controller = GameObject.FindObjectOfType<RoomControllerScript>();
 		roomNumber = controller.roomNumber;
-	}
+        AudioSource[] audios = GetComponents<AudioSource>();
+        fly = audios[0];
+        atacar = audios[1];
+        morir = audios[2];
+    }
 
 	// Use this for initialization
 	void Start()
@@ -63,7 +73,6 @@ public class IA_Diablillo : MonoBehaviour
 
 		beenAttacked = false;
 		facingRight = true;
-
     }
 
 
@@ -74,7 +83,15 @@ public class IA_Diablillo : MonoBehaviour
 
         if (roomNumber == giovannicontrol.roomNumber)
         {
-           
+           if (!atacar.isPlaying && !morir.isPlaying)
+            {
+                fly.Play();
+                fly.loop = true;
+            }
+           else
+            {
+                fly.Stop();
+            }
 
             if (dLife <= 0)
             {
@@ -103,6 +120,8 @@ public class IA_Diablillo : MonoBehaviour
                     isAttacked();
                 }
             }
+
+            attack();
         }
 
         else
@@ -128,7 +147,7 @@ public class IA_Diablillo : MonoBehaviour
 			    Flip();
 		    }
 
-		attack();
+		
 
 
 	}
@@ -172,6 +191,8 @@ public class IA_Diablillo : MonoBehaviour
 	{
 		if (Mathf.Abs(giovannicontrol.transform.position.x - transform.position.x) < 2.5 && Mathf.Abs(giovannicontrol.transform.position.y - transform.position.y) < 3)
 		{
+            atacar.Play();
+            atacar.loop = true;
 			animator.SetBool("Attack", true);
 		}
 		if (giovannistats.isDead)
@@ -186,7 +207,8 @@ public class IA_Diablillo : MonoBehaviour
 
 		if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Diablillo_Die"))
 		{
-			Destroy(diablillo);
+            morir.Play();
+            Destroy(diablillo);
 		}
 	}
 

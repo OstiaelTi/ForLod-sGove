@@ -166,7 +166,8 @@ public class IA_Gordo : MonoBehaviour
     {
         if (Mathf.Abs(giovannicontrol.transform.position.x - transform.position.x) < 2.5 && Mathf.Abs(giovannicontrol.transform.position.y - transform.position.y) < 3)
         {
-            animator.SetBool("Attack", true);
+            //animator.SetBool("Attack", true);
+            giovannistats.isDead = true;
         }
         if (giovannistats.isDead)
         {
@@ -178,7 +179,7 @@ public class IA_Gordo : MonoBehaviour
     {
         animator.SetBool("Dead", true);
 
-        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Diablillo_Die"))
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Gordo_Dead"))
         {
             Destroy(gordo);
         }

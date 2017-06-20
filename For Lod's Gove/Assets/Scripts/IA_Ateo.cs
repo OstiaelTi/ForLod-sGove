@@ -37,10 +37,19 @@ public class IA_Ateo : MonoBehaviour
 
     float timetochange, move_x, move_y;
 
+    //Sounds
+    public AudioSource fly;
+    public AudioSource atacar;
+    public AudioSource morir;
+
     void Awake()
     {
         controller = GameObject.FindObjectOfType<RoomControllerScript>();
         roomNumber = controller.roomNumber;
+        AudioSource[] audios = GetComponents<AudioSource>();
+        fly = audios[0];
+        atacar = audios[1];
+        morir = audios[2];
     }
 
     // Use this for initialization
@@ -73,6 +82,16 @@ public class IA_Ateo : MonoBehaviour
 
         if (roomNumber == giovannicontrol.roomNumber)
         {
+            if (!atacar.isPlaying && !morir.isPlaying)
+            {
+                fly.Play();
+                fly.loop = true;
+            }
+            else
+            {
+                fly.Stop();
+            }
+
             timetochange++;
 
             if (aLife <= 0)
@@ -81,7 +100,7 @@ public class IA_Ateo : MonoBehaviour
             }
 
 
-            if (timetochange > 150)
+            if (timetochange > 50)
             {
                 move_x = Random.Range(-0.5f, 0.5f);
                 move_y = Random.Range(-0.5f, 0.5f);
@@ -103,6 +122,8 @@ public class IA_Ateo : MonoBehaviour
                     isAttacked();
                 }
             }
+
+            attack();
         }
 
 
@@ -116,7 +137,7 @@ public class IA_Ateo : MonoBehaviour
             Flip();
         }
 
-        attack();
+        
 
 
     }
@@ -160,6 +181,8 @@ public class IA_Ateo : MonoBehaviour
     {
         if (Mathf.Abs(giovannicontrol.transform.position.x - transform.position.x) < 2.5 && Mathf.Abs(giovannicontrol.transform.position.y - transform.position.y) < 3)
         {
+            atacar.Play();
+            atacar.loop = true;
             animator.SetBool("Attack", true);
         }
         if (giovannistats.isDead)
@@ -174,6 +197,7 @@ public class IA_Ateo : MonoBehaviour
 
         if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Ateo_Die"))
         {
+            morir.Play();
             Destroy(ateo);
         }
     }
