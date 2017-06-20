@@ -37,9 +37,9 @@ public class IA_Diablillo : MonoBehaviour
 	public GameObject cross;
 	Cross crossStats;
 
-	//posicio inicial
 
-	void Awake(){
+
+    void Awake(){
 		controller = GameObject.FindObjectOfType<RoomControllerScript>();
 		roomNumber = controller.roomNumber;
 	}
@@ -51,9 +51,9 @@ public class IA_Diablillo : MonoBehaviour
 		rb2d.freezeRotation = true;
 		spriterender = GetComponent<SpriteRenderer>();
 		x = transform.position.x;
-		y = transform.position.y;
+        y = transform.position.y;
 
-        
+
         giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
 		giovannistats = GameObject.FindObjectOfType<GiovanniStats>();
 		animator = GetComponent<Animator>();
@@ -63,7 +63,8 @@ public class IA_Diablillo : MonoBehaviour
 
 		beenAttacked = false;
 		facingRight = true;
-	}
+
+    }
 
 
 
@@ -73,6 +74,8 @@ public class IA_Diablillo : MonoBehaviour
 
         if (roomNumber == giovannicontrol.roomNumber)
         {
+           
+
             if (dLife <= 0)
             {
                 Death();
@@ -80,9 +83,11 @@ public class IA_Diablillo : MonoBehaviour
 
             float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
 
-            float unitari_x = (target.position.x - transform.position.x) / moduloVector;
-            float unitari_y = (target.position.y - transform.position.y) / moduloVector;
+             float unitari_x = (target.position.x - transform.position.x) / moduloVector;
+             float unitari_y = (target.position.y - transform.position.y) / moduloVector;
 
+
+            
             transform.position = new Vector2(
                 unitari_x * dSpeed + transform.position.x,
                 unitari_y * dSpeed + transform.position.y

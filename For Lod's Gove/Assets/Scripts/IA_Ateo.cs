@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IA_Gordo : MonoBehaviour
+public class IA_Ateo : MonoBehaviour
 {
     //Stats Diablillo
-    public GameObject gordo;
-    public float gSpeed;
-    public float gLife;
+    public GameObject ateo;
+    public float aSpeed;
+    public float aLife;
     private Rigidbody2D rb2d;
     private SpriteRenderer spriterender;
     public bool isDead = false;
@@ -14,7 +14,7 @@ public class IA_Gordo : MonoBehaviour
     private bool beenAttacked;
     private Animator animator;
 
-    //GordoDead gordodead;
+    //AteoDead ateodead;
 
     //Room
     public int roomNumber;
@@ -35,7 +35,7 @@ public class IA_Gordo : MonoBehaviour
     public GameObject cross;
     Cross crossStats;
 
-    //posicio inicial
+    float timetochange, move_x, move_y;
 
     void Awake()
     {
@@ -51,7 +51,8 @@ public class IA_Gordo : MonoBehaviour
         spriterender = GetComponent<SpriteRenderer>();
         x = transform.position.x;
         y = transform.position.y;
-
+        move_x = Random.Range(-0.5f, 0.5f);
+        move_y = Random.Range(-0.5f, 0.5f);
 
         giovannicontrol = GameObject.FindObjectOfType<GiovanniControl>();
         giovannistats = GameObject.FindObjectOfType<GiovanniStats>();
@@ -72,19 +73,24 @@ public class IA_Gordo : MonoBehaviour
 
         if (roomNumber == giovannicontrol.roomNumber)
         {
-            if (gLife <= 0)
+            timetochange++;
+
+            if (aLife <= 0)
             {
                 Death();
             }
 
-            float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
 
-            float unitari_x = (target.position.x - transform.position.x) / moduloVector;
-            float unitari_y = (target.position.y - transform.position.y) / moduloVector;
+            if (timetochange > 150)
+            {
+                move_x = Random.Range(-0.5f, 0.5f);
+                move_y = Random.Range(-0.5f, 0.5f);
+                timetochange = 0;
+            }
 
             transform.position = new Vector2(
-                unitari_x * gSpeed + transform.position.x,
-                unitari_y * gSpeed + transform.position.y
+                move_x * aSpeed + transform.position.x,
+                move_y * aSpeed + transform.position.y
             );
 
             if (cross)
@@ -99,18 +105,6 @@ public class IA_Gordo : MonoBehaviour
             }
         }
 
-        else
-        {
-            float moduloVector = Mathf.Sqrt(Mathf.Pow(target.position.x - transform.position.x, 2) + Mathf.Pow(target.position.y - transform.position.y, 2));
-
-            float unitari_x = (x - transform.position.x) / moduloVector;
-            float unitari_y = (y - transform.position.y) / moduloVector;
-
-            transform.position = new Vector2(
-                unitari_x * gSpeed + transform.position.x,
-                unitari_y * gSpeed + transform.position.y
-            );
-        }
 
         if (target.position.x < transform.position.x && facingRight)
         {
@@ -154,7 +148,7 @@ public class IA_Gordo : MonoBehaviour
     {
         if (!beenAttacked)
         {
-            gLife -= crossStats.damage;
+            aLife -= crossStats.damage;
             //spriterender.color = new Color(200f, 0f, 0f);
             beenAttacked = true;
         }
@@ -180,7 +174,7 @@ public class IA_Gordo : MonoBehaviour
 
         if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Diablillo_Die"))
         {
-            Destroy(gordo);
+            Destroy(ateo);
         }
     }
 

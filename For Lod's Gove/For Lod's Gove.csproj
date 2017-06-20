@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\FirstRoom.cs" />
     <Compile Include="Assets\Scripts\GiovanniControl.cs" />
     <Compile Include="Assets\Scripts\GiovanniStats.cs" />
+    <Compile Include="Assets\Scripts\IA_Ateo.cs" />
     <Compile Include="Assets\Scripts\IA_Diablillo.cs" />
     <Compile Include="Assets\Scripts\IA_Gordo.cs" />
     <Compile Include="Assets\Scripts\NextZone.cs" />
