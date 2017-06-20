@@ -172,7 +172,7 @@ public class IA_Ateo : MonoBehaviour
     {
         animator.SetBool("Dead", true);
 
-        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Diablillo_Die"))
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("Ateo_Die"))
         {
             Destroy(ateo);
         }
