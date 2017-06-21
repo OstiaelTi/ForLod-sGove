@@ -28,8 +28,12 @@ public class GiovanniStats : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		Scene scene = SceneManager.GetActiveScene ();
 		if (Input.GetKey ("g")) {
+			if(scene.name == "Zone1")
 			SceneManager.LoadScene ("Zone2", LoadSceneMode.Single);
+			if(scene.name == "Zone2")
+			SceneManager.LoadScene ("Zone3", LoadSceneMode.Single);
 		}
 
 	}
