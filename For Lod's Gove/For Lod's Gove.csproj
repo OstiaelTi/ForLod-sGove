@@ -91,13 +91,13 @@
     <Compile Include="Assets\Scripts\IA_Ateo.cs" />
     <Compile Include="Assets\Scripts\IA_Diablillo.cs" />
     <Compile Include="Assets\Scripts\IA_Gordo.cs" />
-    <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\NextZone.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\RoomControllerScript.cs" />
     <Compile Include="Assets\Scripts\Room_1.cs" />
-    <Compile Include="Assets\Scripts\Room_2.cs" />
     <Compile Include="Assets\Scripts\Spawn.cs" />
+    <Compile Include="Assets\Scripts\diapo.cs" />
+    <Compile Include="Assets\Scripts\start.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

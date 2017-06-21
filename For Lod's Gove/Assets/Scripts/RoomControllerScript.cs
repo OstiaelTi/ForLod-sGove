@@ -7,8 +7,8 @@ public class RoomControllerScript : MonoBehaviour {
 	public GameObject firstRoom;
 	public GameObject Room;
     public GameObject LastRoom;
-    public static int numeroSalas = 10;
-	public int roomNumber;
+    public static int numeroSalas;
+	public int roomNumber, roomQ;
 	public static int
 	porcentaje = 4,
 	dim = 40,
@@ -26,6 +26,7 @@ public class RoomControllerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+        numeroSalas = roomQ;
 		mapa[dim/2, dim/2] = 2;
 		FillMap ();
 

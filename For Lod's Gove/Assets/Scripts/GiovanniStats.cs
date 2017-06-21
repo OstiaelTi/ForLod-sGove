@@ -31,9 +31,9 @@ public class GiovanniStats : MonoBehaviour
 		Scene scene = SceneManager.GetActiveScene ();
 		if (Input.GetKey ("g")) {
 			if(scene.name == "Zone1")
+			SceneManager.LoadScene ("Test", LoadSceneMode.Single);
+			if(scene.name == "Test")
 			SceneManager.LoadScene ("Zone2", LoadSceneMode.Single);
-			if(scene.name == "Zone2")
-			SceneManager.LoadScene ("Zone3", LoadSceneMode.Single);
 		}
 
 	}
